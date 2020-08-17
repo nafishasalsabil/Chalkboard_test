@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "441927559337",
+    "firebase_url": "https://chalkboardnew-27163.firebaseio.com",
+    "project_id": "chalkboardnew-27163",
+    "storage_bucket": "chalkboardnew-27163.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441927559337:android:7b761b738e45f72f65a1b8",
+        "android_client_info": {
+          "package_name": "com.example.chalkboardnew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441927559337-c6i9t7d96bis5ip2pumvofmu84eqaftj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chalkboardnew",
+            "certificate_hash": "b299af4ff34dbe10f7ba796040030e8c53de355e"
+          }
+        },
+        {
+          "client_id": "441927559337-6ticpi275ecrlgnkrr3olqtvvmcshvn9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJ1HAcgR58WIu2qbcCJxkNcXSBdg1efTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "441927559337-6ticpi275ecrlgnkrr3olqtvvmcshvn9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -341,11 +341,10 @@ public class InsideClassActivity extends AppCompatActivity implements Navigation
         switch (menuItem.getItemId()) {
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-
-                Intent intent = new Intent(InsideClassActivity.this, Main2Activity.class);
+Intent intent = new Intent(InsideClassActivity.this, Main2Activity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
+//nafisa tomar id te repo naki?hm... tomar git log in daw.. ar e ai khane nah brwserr
                 startActivity(intent);
 
            /*     Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
