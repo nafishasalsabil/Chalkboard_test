@@ -24,9 +24,10 @@
         android:src="@drawable/ic_add_black_24dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="?attr/actionBarSize" />
+        android:id="@+id/recyclerview"
+        android:paddingTop="?attr/actionBarSize"
+        />
 
 </RelativeLayout>
