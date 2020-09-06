@@ -4,7 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".PDFs">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_pdf"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:elevation="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        />
 
     <ListView
         android:layout_width="match_parent"

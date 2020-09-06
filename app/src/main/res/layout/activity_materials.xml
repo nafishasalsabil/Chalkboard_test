@@ -55,6 +55,7 @@ android:clickable="true"
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/tutorilas_layout"
         android:layout_width="193dp"
         android:layout_height="253dp"
         android:layout_alignParentStart="true"
@@ -96,6 +97,7 @@ android:clickable="true"
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/exam_questions_layout"
         android:layout_width="193dp"
         android:layout_height="253dp"
         android:layout_alignParentStart="true"
@@ -136,6 +138,7 @@ android:clickable="true"
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/my_notes_layout"
         android:layout_width="193dp"
         android:layout_height="253dp"
         android:layout_alignParentStart="true"
