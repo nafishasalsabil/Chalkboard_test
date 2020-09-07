@@ -32,10 +32,10 @@ public class Student_Attendance extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
+     /*   recyclerView.setLayoutManager(layoutManager);
         studentAdapter = new StudentAdapter(this,studentItems);
         recyclerView.setAdapter(studentAdapter);
-       // studentAdapter.setOnItemClickListener(position -> changeStatus(position));
+       */// studentAdapter.setOnItemClickListener(position -> changeStatus(position));
     }
 
   /*  private void changeStatus(int position) {

@@ -7,19 +7,19 @@
 
     tools:context=".Materials">
     <include
-        android:id="@+id/include"
+        android:id="@+id/toolbar_materials"
         layout="@layout/toolbar" />
 
 
     <RelativeLayout
+        android:id="@+id/pdf_layout"
         android:layout_width="193dp"
-        android:layout_height="253dp"
+        android:layout_height="310dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="7dp"
         android:layout_marginTop="105dp"
         android:background="#98AEA4"
-
+android:clickable="true"
         android:layout_alignParentLeft="true"
 
         >
@@ -54,11 +54,12 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/tutorilas_layout"
         android:layout_width="193dp"
-        android:layout_height="253dp"
+        android:layout_height="310dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="210dp"
+        android:layout_marginStart="200dp"
         android:layout_marginTop="105dp"
         android:background="#CDE5E8">
 
@@ -95,11 +96,11 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/exam_questions_layout"
         android:layout_width="193dp"
-        android:layout_height="253dp"
+        android:layout_height="310dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="367dp"
+        android:layout_marginTop="422dp"
         android:background="#3A5463">
 
         <ImageView
@@ -135,11 +136,12 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/my_notes_layout"
         android:layout_width="193dp"
-        android:layout_height="253dp"
+        android:layout_height="310dp"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="210dp"
-        android:layout_marginTop="367dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="422dp"
         android:background="#365D5A">
         <ImageView
             android:layout_width="wrap_content"
