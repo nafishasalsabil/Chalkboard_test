@@ -263,88 +263,15 @@ public class Attendance_activity extends AppCompatActivity {
            attendance_done_fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                add_func();
-                dialog.dismiss();
-
-            }
-        });
-        no.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateAndLectureDialog();
-                dialog.dismiss();
+                p=0;
+                l=0;
+                a=0;
+                presentcount.setText(String.valueOf(p));
+                absentcount.setText(String.valueOf(a));
+                latecount.setText(String.valueOf(l));
 
 
-            }
-        });
-
-
-    }
-
-    private void showDateAndLectureDialog() {
-        AlertDialog.Builder alerDialog2 = new AlertDialog.Builder(this);
-        View view = LayoutInflater.from(this).inflate(R.layout.lecture_and_date, null);
-        alerDialog2.setView(view);
-        AlertDialog dialog = alerDialog2.create();
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-
-        dialog.show();
-        TextView lecture_text = view.findViewById(R.id.lecture_edittext);
-        Button done_button = (Button) view.findViewById(R.id.done_lecture);
-        TextView date_textview = view.findViewById(R.id.date_textview);
-        String date_date;
-
-        date_textview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePicker datePicker = new DatePicker(Attendance_activity.this);
-                int day = datePicker.getDayOfMonth();
-                int month = (datePicker.getMonth()) + 1;
-                int year = datePicker.getYear();
-
-                datePickerDialog = new DatePickerDialog(Attendance_activity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String date_date = dayOfMonth + "/" + (month + 1) + "/" + year;
-                        date_textview.setText(date_date);
-//                        object.setLecture_date(date_date);
-                        studentItems_object.setLecture_date(date_date);
-
-                    }
-                }, day, month, year);
-                datePickerDialog.show();
-            }
-        });
-
-
-        done_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                detect2 = "make_visible";
-                studentAdapter.notifyDataSetChanged();
-                present.setVisibility(View.VISIBLE);
-                absent.setVisibility(View.VISIBLE);
-                late.setVisibility(View.VISIBLE);
-                fab.setVisibility(View.GONE);
-                attendance_done_fab.setVisibility(View.VISIBLE);
-                //   fab.setVisibility(View.INVISIBLE);
-                Lecture_s = lecture_text.getText().toString().trim();
-                //    System.out.println(Lecture);
-                // lecture_method(Lecture);
-       //         object.setLecture_name(Lecture_s);
-                studentItems_object.setLecture_name(Lecture_s);
-          //      System.out.println(object.getStudent_name());
-
-/*
-                String s_name = object.getStudent_name();
-                String s_id = object.getStudent_id();
-                System.out.println(object.getStudent_id());
-                documentReference2 = firestore.collection("users").document(userID).collection("Courses").document(clicked_courseTitle).collection("Attendance").document(Lecture_s).collection("Students").document(s_id);
-                Map<String,Object> inuser = new HashMap<>();
-                inuser.put("student_id",s_id);
-                inuser.put("student_name",s_name);
-
-               Intent intent1 = new Intent(getApplicationContext(), StudentList.class);
+                Intent intent1 = new Intent(getApplicationContext(), StudentList.class);
                intent1.putExtra("title",clicked_courseTitle);
                intent1.putExtra("section",clicked_course_section);
                startActivity(intent1);
