@@ -81,6 +81,8 @@ public class Attendance_activity extends AppCompatActivity {
     private AlertDialog.Builder alerDialog;
     private AlertDialog.Builder alertdialog_for_attendance;
     String Lecture_s ="";
+    Lecture object = new Lecture();
+    String clicked_courseTitle="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +109,7 @@ public class Attendance_activity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         Intent intent = getIntent();
-        String clicked_courseTitle = intent.getStringExtra("title");
+         clicked_courseTitle = intent.getStringExtra("title");
         System.out.println(clicked_courseTitle);
         studentAdapter = new StudentAdapter(getApplicationContext(), studentItems);
         recyclerView.setAdapter(studentAdapter);
@@ -177,17 +179,7 @@ public class Attendance_activity extends AppCompatActivity {
                 add_func();
 
 
-             /*   detect1 = "make_invisible";
-                studentAdapter.notifyDataSetChanged();
-                present.setVisibility(View.GONE);
-                absent.setVisibility(View.GONE);
-                late.setVisibility(View.GONE);
-                done.setVisibility(View.VISIBLE);
-                add_student_new_fab.setVisibility(View.VISIBLE);
-                fab.setVisibility(View.INVISIBLE);
-*/// recyclerView.findViewHolderForAdapterPosition()
-                //   recyclerView.findViewHolderForAdapterPosition().itemView.findViewById(R.id.radioButton_present);
-            }
+               }
         });
         add_student_new_fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -344,13 +336,6 @@ public class Attendance_activity extends AppCompatActivity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*detect2 = "make_visible";
-                studentAdapter.notifyDataSetChanged();
-                present.setVisibility(View.VISIBLE);
-                absent.setVisibility(View.VISIBLE);
-                late.setVisibility(View.VISIBLE);
-
-                */
                 showDateAndLectureDialog();
                 dialog.dismiss();
 
@@ -373,7 +358,6 @@ public class Attendance_activity extends AppCompatActivity {
         TextView lecture_text = view.findViewById(R.id.lecture_edittext);
         Button done_button =(Button)view.findViewById(R.id.done_lecture);
         TextView date_textview = view.findViewById(R.id.date_textview);
-        Lecture object = new Lecture();
 
 
         date_textview.setOnClickListener(new View.OnClickListener() {
@@ -411,6 +395,10 @@ public class Attendance_activity extends AppCompatActivity {
             //    System.out.println(Lecture);
                // lecture_method(Lecture);
                 object.setLecture_name(Lecture_s);
+              //  System.out.println(object.getStudent_name());
+                String student_name = object.getStudent_name();
+                String student_id = object.getStudent_id();
+                documentReference = firestore.collection("users").document(userID).collection("Courses").document(clicked_courseTitle).collection("Attendance").document(Lecture_s);
 
                 dialog.dismiss();
 
@@ -626,6 +614,8 @@ public class Attendance_activity extends AppCompatActivity {
     private void addstudent() {
         String id1 = id.getText().toString();
         String name1 = name.getText().toString();
+        object.setStudent_id(id1);
+        object.setStudent_name(name1);
         studentItems.add(new StudentItems(id1, name1, ""));
         studentAdapter.notifyDataSetChanged();
 

@@ -142,6 +142,7 @@ class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.studentViewHold
                if(checkedItem==R.id.radioButton_present )
                {
                    status = PRESENT_TEXT;
+
                   /* holder.radioButtonPresent.setButtonDrawable(R.drawable.p_filled);
                    holder.radioButtonAbs.setButtonDrawable(R.drawable.a);
                    holder.radioButtonLate.setButtonDrawable(R.drawable.l);
