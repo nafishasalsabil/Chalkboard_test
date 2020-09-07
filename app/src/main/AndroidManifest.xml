@@ -34,7 +34,7 @@
             />
         <activity android:name=".Exam_Questions" />
         <activity android:name=".PDFs" />
-        <activity android:name=".Results" />
+
         <activity android:name=".Materials" />
         <activity android:name=".AddNewStudents" />
         <activity android:name=".Attendance_activity" />

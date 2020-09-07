@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
     Context context;
     List<NotesClass> notes;
 
+    String state = "";
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -57,16 +59,20 @@ class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
 
     }
 
+    public void setState(String state) {
+        this.state = state;
+    }
 
     public static class NotesViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-        TextView note_title,note_subtitle,my_note;
+        TextView note_title,note_subtitle,my_note,url;
 
         public NotesViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
             note_title = itemView.findViewById(R.id.notes_title);
             note_subtitle = itemView.findViewById(R.id.notes_subtitle);
             my_note = itemView.findViewById(R.id.mynotes);
+            url = itemView.findViewById(R.id.url_tv);
                   }
     }
 
@@ -82,6 +88,22 @@ class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NotesViewHolder> {
         holder.note_title.setText(notes.get(position).getNoteTitle());
         holder.note_subtitle.setText(notes.get(position).getSubtitle());
         holder.my_note.setText(notes.get(position).getMynote());
+        holder.url.setText(notes.get(position).getUrl());
+        if (notes.get(position).getUrl().equals("No url added"))
+        {
+            holder.url.setVisibility(View.GONE);
+
+        }
+        else
+        {
+            holder.url.setVisibility(View.VISIBLE);
+            Linkify.addLinks(holder.url, Linkify.WEB_URLS);
+            holder.url.setLinkTextColor(Color.parseColor("#85BFB4"));
+
+
+        }
+
+
         // System.out.println(position);
         //  System.out.println(holder.getAdapterPosition());
 

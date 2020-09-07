@@ -113,8 +113,10 @@ public class InsideClassActivity extends AppCompatActivity{
         materials.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Materials.class));
-
+                Intent intent = new Intent(getApplicationContext(),Materials.class);
+                intent.putExtra("section",section);
+                intent.putExtra("title",title);
+                startActivity(intent);
             }
         });
         results.setOnClickListener(new View.OnClickListener() {

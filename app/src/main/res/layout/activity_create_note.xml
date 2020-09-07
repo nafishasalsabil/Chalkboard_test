@@ -14,40 +14,45 @@
         android:clipToPadding="false"
         android:paddingBottom="10dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:id="@+id/c_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:orientation="vertical"
             android:animateLayoutChanges="true">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ImageBack"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_back"
+                    android:tint="@color/c6"
+                 />
+
+                <ImageView
+                    android:id="@+id/ImageSave"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="-30dp"
+                    android:layout_marginStart="356dp"
+                    android:background="@drawable/background_done_button"
+                    android:contentDescription="@string/app_name"
+                    android:padding="4dp"
+                    android:src="@drawable/ic_done"
+                    android:tint="@color/c6"
+                    android:clickable="true" />
 
 
-            <ImageView
-                android:id="@+id/ImageBack"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_back"
-                android:tint="@color/c6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/ImageSave"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/background_done_button"
-                android:contentDescription="@string/app_name"
-                android:padding="4dp"
-                android:src="@drawable/ic_done"
-                android:tint="@color/c6"
-                android:clickable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/ImageBack"
-                app:layout_constraintVertical_bias="0.272" />
+            </LinearLayout>
+
 
 
 
@@ -57,7 +62,7 @@
                 android:id="@+id/inputNoteTitle"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="12dp"
                 android:background="@null"
@@ -78,7 +83,7 @@
                 android:id="@+id/textDateTime"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginEnd="12dp"
                 android:fontFamily="@font/exoregular"
                 android:padding="10dp"
@@ -89,37 +94,59 @@
                 app:layout_constraintEnd_toEndOf="@id/inputNoteTitle"
                 app:layout_constraintStart_toStartOf="@id/inputNoteTitle"
                 app:layout_constraintTop_toBottomOf="@id/inputNoteTitle" />
-
-            <EditText
-                android:id="@+id/inputNoteSubtitle"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="12dp"
-                android:background="@null"
-                android:fontFamily="@font/exoregular"
-                android:hint="@string/note_subtitle"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textColor="@android:color/black"
-                android:textColorHint="@color/c6"
-                android:textSize="18dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/viewSubtitleIndicator"
-                app:layout_constraintTop_toBottomOf="@id/textDateTime"
+                android:orientation="horizontal">
+                <View
+                    android:id="@+id/viewSubtitleIndicator"
+                    android:layout_width="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:background="@drawable/background_subtitle_indicator"
+                    app:layout_constraintBottom_toBottomOf="@id/inputNoteSubtitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/inputNoteSubtitle" />
 
+
+                <EditText
+                    android:id="@+id/inputNoteSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@null"
+                    android:fontFamily="@font/exoregular"
+                    android:hint="@string/note_subtitle"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/c6"
+                    android:textSize="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/viewSubtitleIndicator"
+                    app:layout_constraintTop_toBottomOf="@id/textDateTime"
+
+                    />
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/url_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/c6"
+                android:fontFamily="@font/exoregular"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:text="url"
+                android:visibility="gone"
+                android:autoLink="web"
+                android:clickable="true"
                 />
 
-            <View
-                android:id="@+id/viewSubtitleIndicator"
-                android:layout_width="5dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="12dp"
-                android:background="@drawable/background_subtitle_indicator"
-                app:layout_constraintBottom_toBottomOf="@id/inputNoteSubtitle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/inputNoteSubtitle" />
 
             <EditText
                 android:id="@+id/inputNote"
@@ -144,24 +171,22 @@
 
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
 
 
     </ScrollView>
 
     <ImageView
         android:id="@+id/image_url"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="600dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="690dp"
         android:background="@drawable/ic_web_link"
         android:clickable="true"
         android:contentDescription="@string/app_name"
         android:padding="4dp"
-        android:src="@drawable/ic_done"
         android:tint="@color/c6"
-        android:layout_marginStart="360dp"
+        android:layout_marginStart="330dp"
 
         />
 

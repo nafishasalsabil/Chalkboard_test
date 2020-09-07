@@ -29,7 +29,7 @@ Toolbar pdf_toolbar;
         PDFs= new ArrayList<>();
         setSupportActionBar(pdf_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        pdf_toolbar.setNavigationIcon(R.drawable.c);
+        pdf_toolbar.setNavigationIcon(R.drawable.ic_back);
         pdf_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
