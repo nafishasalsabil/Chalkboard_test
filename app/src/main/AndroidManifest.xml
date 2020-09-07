@@ -21,6 +21,19 @@
         <activity android:name=".Attendance_record" />
         <activity android:name=".Sections_Inside_Courses" />
         <activity android:name=".Results" />
+        <activity
+            android:name=".CreateNoteActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            />
+        <activity
+            android:name=".MyNotes"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden"
+            />
+        <activity android:name=".Exam_Questions" />
+        <activity android:name=".PDFs" />
+        <activity android:name=".Results" />
         <activity android:name=".Materials" />
         <activity android:name=".AddNewStudents" />
         <activity android:name=".Attendance_activity" />

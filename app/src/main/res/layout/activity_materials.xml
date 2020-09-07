@@ -12,13 +12,14 @@
 
 
     <RelativeLayout
+        android:id="@+id/pdf_layout"
         android:layout_width="193dp"
         android:layout_height="310dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="105dp"
         android:background="#98AEA4"
-
+android:clickable="true"
         android:layout_alignParentLeft="true"
 
         >
@@ -53,6 +54,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/tutorilas_layout"
         android:layout_width="193dp"
         android:layout_height="310dp"
         android:layout_alignParentStart="true"
@@ -94,6 +96,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/exam_questions_layout"
         android:layout_width="193dp"
         android:layout_height="310dp"
         android:layout_alignParentStart="true"
@@ -133,6 +136,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/my_notes_layout"
         android:layout_width="193dp"
         android:layout_height="310dp"
         android:layout_alignParentStart="true"
