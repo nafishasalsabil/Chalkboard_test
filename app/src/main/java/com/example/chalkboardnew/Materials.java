@@ -17,6 +17,9 @@ public class Materials extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_materials);
+        Intent intent  = getIntent();
+        String title  =intent.getStringExtra("title");
+        String sec = intent.getStringExtra("section");
         toolbar_materials = findViewById(R.id.toolbar_materials);
         setSupportActionBar(toolbar_materials);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -51,7 +54,10 @@ public class Materials extends AppCompatActivity {
         my_notes_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),MyNotes.class));
+                Intent intent1 = new Intent(getApplicationContext(),MyNotes.class);
+                intent1.putExtra("section",sec);
+                intent1.putExtra("title",title);
+                startActivity(intent1);
 
             }
         });

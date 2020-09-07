@@ -11,6 +11,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.text.util.Linkify;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -35,14 +40,26 @@ public class CreateNoteActivity extends AppCompatActivity {
     private TextView textDateTime;
     private TextView textWebURL;
     private LinearLayout layoutWebURL;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    String userID = firebaseAuth.getCurrentUser().getUid();
 
+    public String title = "";
+    public String section = "";
+    DocumentReference documentReference;
+    TextView url_text;
     public String input_note = "";
     private AlertDialog dialogAddURL;
     ImageView image_url;
+    public String date_today = "";
+    public String url = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_note);
+        Intent intent  = getIntent();
+         title  =intent.getStringExtra("title");
+         section = intent.getStringExtra("section");
 
         ImageView imageBack = findViewById(R.id.ImageBack);
         ImageView imageSave = findViewById(R.id.ImageSave);
@@ -58,7 +75,11 @@ public class CreateNoteActivity extends AppCompatActivity {
         inputNoteText = findViewById(R.id.inputNote);
         textDateTime = findViewById(R.id.textDateTime);
         image_url = findViewById(R.id.image_url);
+        url_text = findViewById(R.id.url_textview);
 
+        date_today = new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
+                .format(new Date());
+        System.out.println(date_today);
         textDateTime.setText(
                 new SimpleDateFormat("EEEE, dd MMMM yyyy HH:mm a", Locale.getDefault())
                 .format(new Date())
@@ -102,7 +123,7 @@ public class CreateNoteActivity extends AppCompatActivity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = input_url.getText().toString().trim();
+                 url = input_url.getText().toString().trim();
                 input_note = inputNoteText.getText().toString();
 
                 System.out.println(input_note);
@@ -125,9 +146,14 @@ public class CreateNoteActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    String u = inputNoteText.getText().toString() + " " + input_url.getText().toString();
+                   /* String u = inputNoteText.getText().toString() + " " + input_url.getText().toString();
                     inputNoteText.setText(u);
-                    dialog.dismiss();
+                   */
+                   url_text.setVisibility(View.VISIBLE);
+                   url_text.setText(url);
+                    Linkify.addLinks(url_text, Linkify.WEB_URLS);
+                    url_text.setLinkTextColor(Color.parseColor("#365D5A"));
+                   dialog.dismiss();
                 }
 
 
@@ -151,9 +177,31 @@ public class CreateNoteActivity extends AppCompatActivity {
             String note_title = inputNoteTitle.getText().toString().trim();
             String note_subtitle = inputNoteSubtitle.getText().toString().trim();
             String my_note = inputNoteText.getText().toString().trim();
+            String link = "";
+            if(url.isEmpty())
+            {
+                url = "No url added";
+            }
 
 
-            startActivity(new Intent(getApplicationContext(),MyNotes.class));
+
+            DocumentReference documentReference = firestore.collection("users").document(userID)
+                    .collection("Courses").document(title)
+                    .collection("Sections").document(section).collection("MyNotes").document(note_title);
+            Map<String, Object> user = new HashMap<>();
+            user.put("noteTitle", note_title);
+            user.put("subtitle",note_subtitle);
+            user.put("date",date_today);
+            user.put("mynote",my_note);
+            user.put("url",url);
+
+
+            documentReference.set(user);
+
+            Intent intent = new Intent(getApplicationContext(),MyNotes.class);
+            intent.putExtra("section",section);
+            intent.putExtra("title",title);
+            startActivity(intent);
             /*Map<String, Object> user = new HashMap<>();
             user.put("noteTitle", note_title);
             user.put("subtitle", note_subtitle);
