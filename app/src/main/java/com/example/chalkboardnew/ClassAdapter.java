@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +22,31 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
+class ClassAdapter extends FirestoreRecyclerAdapter<CourseInfo,ClassAdapter.ClassViewHolder> {
 
     Context context;
     List<CourseInfo> classitems;
+
+    DocumentSnapshot documentSnapshot;
+
+    /**
+     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
+     * FirestoreRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public ClassAdapter(@NonNull FirestoreRecyclerOptions<CourseInfo> options) {
+        super(options);
+    }
 
     public int getPos() {
         return pos;
@@ -50,23 +66,27 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
 
     private OnItemClickListener onItemClickListener;
 
+
     public interface OnItemClickListener {
 
         void onClick(int position);
 
+    }
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public ClassAdapter(Context context, List<CourseInfo> classitems) {
+    /*public ClassAdapter(Context context, List<CourseInfo> classitems) {
         this.classitems = classitems;
         this.context = context;
 
 
     }
-
+*/
 
     public static class ClassViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
@@ -84,13 +104,15 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
                 @Override
                 public void onClick(View v) {
 //                    onItemClickListener.onClick(ClassViewHolder.this.getAdapterPosition());
-                    Intent intent = new Intent(v.getContext(),InsideClassActivity.class);
+                    Intent intent = new Intent(v.getContext(),Sections_Inside_Courses.class);
                     intent.putExtra("Title",classname.getText());
                    // System.out.println(classname.getText());
                     v.getContext().startActivity(intent);
                 }
             });
         }
+
+
     }
 
     @NonNull
@@ -101,9 +123,9 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ClassViewHolder holder, int position) {
-        holder.classname.setText(classitems.get(position).getCourseTitle());
-        holder.course.setText(classitems.get(position).getCourseNo());
+    protected void onBindViewHolder(@NonNull ClassViewHolder holder, int position, @NonNull CourseInfo model)  {
+        holder.classname.setText(model.getCourseTitle());
+        holder.course.setText(model.getCourseNo());
        // System.out.println(position);
       //  System.out.println(holder.getAdapterPosition());
 
@@ -217,18 +239,18 @@ class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHolder> {
 
         });
 
-        int cardcolors[] = context.getResources().getIntArray(R.array.classcolors);
+       /* int cardcolors[] = context.getResources().getIntArray(R.array.classcolors);
         int randomAndroidColor = cardcolors[new Random().nextInt(cardcolors.length)];
         //  int remainder = getAdapterPosition() % cardcolors.size();
         holder.cardView.setBackgroundColor(randomAndroidColor);
-        holder.cardView.setRadius(6);
-
+        holder.cardView.setRadius(6);*/
 
     }
 
 
-    @Override
-    public int getItemCount() {
-        return classitems.size();
-    }
+
+
+
+
+
 }
