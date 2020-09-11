@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 public class Materials extends AppCompatActivity {
@@ -58,6 +57,14 @@ public class Materials extends AppCompatActivity {
                 intent1.putExtra("section",sec);
                 intent1.putExtra("title",title);
                 startActivity(intent1);
+
+            }
+        });
+
+        tutorials_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Tutorials.class));
 
             }
         });
