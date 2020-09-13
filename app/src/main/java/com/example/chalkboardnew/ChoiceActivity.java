@@ -36,6 +36,8 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
     String userID;
     SharedPreferences sharedPreferences;
 Boolean select = false;
+  public   String proff = "Professional teacher";
+    public String home = "Home tutor";
 
 
     @Override
@@ -47,9 +49,7 @@ Boolean select = false;
         prof.setOnClickListener(this);
         tutor.setOnClickListener(this);
         firebaseAuth = FirebaseAuth.getInstance();
-        String proff = "Professional teacher";
-        String home = "Home tutor";
-        firestore = FirebaseFirestore.getInstance();
+       firestore = FirebaseFirestore.getInstance();
 
 
         prof.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +116,7 @@ Boolean select = false;
                 documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        startActivity(new Intent(getApplicationContext(), Features.class));
+                        startActivity(new Intent(getApplicationContext(), MainActivity_HomeTutor.class));
 
 
                     }
