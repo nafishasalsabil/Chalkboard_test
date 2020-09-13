@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MyNotes_hometutor"></activity>
+        <activity android:name=".layout_add_tutorial_links_hometutor"></activity>
+        <activity android:name=".CreateNoteHometutor" />
+        <activity android:name=".Add_new_students_hometutor" />
+        <activity android:name=".MyNotes_hometutor" />
         <activity android:name=".Attendance_record_hometutor" />
         <activity android:name=".Attendance_activity_hometutor" />
         <activity android:name=".Attendance_hometutor" />
