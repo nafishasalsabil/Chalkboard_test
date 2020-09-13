@@ -39,7 +39,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="87dp"
             android:layout_marginTop="340dp"
-            android:fontFamily="@font/pfdintextcompproregular"
+            android:fontFamily="@font/exoregular"
             android:text="password"
             android:textColor="@android:color/white" />
 
@@ -52,7 +52,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="85dp"
             android:layout_marginTop="405dp"
-            android:fontFamily="@font/pfdintextcompproregular"
+            android:fontFamily="@font/exoregular"
             android:text="confirm password"
             android:textColor="@android:color/white" />
 
@@ -64,7 +64,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="87dp"
         android:layout_marginTop="271dp"
-        android:fontFamily="@font/pfdintextcompproregular"
+        android:fontFamily="@font/exoregular"
         android:text="email"
         android:textColor="@android:color/white" />
 
@@ -77,7 +77,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="87dp"
         android:layout_marginTop="203dp"
-        android:fontFamily="@font/pfdintextcompproregular"
+        android:fontFamily="@font/exoregular"
         android:text="username"
         android:textColor="@android:color/white" />
 
@@ -92,9 +92,10 @@
         android:layout_marginTop="296dp"
         android:background="@drawable/roundededittext"
         android:cursorVisible="true"
-        android:fontFamily="@font/pfdintextcompproregular"
+        android:fontFamily="@font/exoregular"
         android:hint="         louis.hoffman@gmail.com"
         android:inputType="textEmailAddress"
+        android:gravity="center"
         android:textColorHint="#A9E5D9"
         android:textCursorDrawable="@android:color/black" />
 
@@ -109,7 +110,7 @@
         android:layout_marginTop="228dp"
         android:background="@drawable/roundededittext"
         android:cursorVisible="true"
-        android:fontFamily="@font/pfdintextcompproregular"
+        android:fontFamily="@font/exoregular"
         android:hint="tokyo123"
         android:inputType="text"
         android:gravity="center"
@@ -125,7 +126,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="-4dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginBottom="253dp"
+        android:layout_marginBottom="373dp"
         android:backgroundTint="@android:color/white"
         android:textColorHint="@android:color/black"
         app:boxStrokeColor="@android:color/black"
@@ -162,7 +163,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginBottom="163dp"
+        android:layout_marginBottom="283dp"
         android:backgroundTint="@android:color/white"
         android:textColorHint="@android:color/black"
         app:boxStrokeColor="@android:color/black"
@@ -183,8 +184,9 @@
             android:layout_marginBottom="40dp"
             android:background="@drawable/roundededittext"
             android:cursorVisible="true"
-            android:fontFamily="@font/pfdintextcompproregular"
+            android:fontFamily="@font/exoregular"
             android:inputType="textPassword"
+            android:gravity="center"
             android:textCursorDrawable="@android:color/black" />
 
 
@@ -200,7 +202,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="499dp"
         android:background="@drawable/roundedbutton"
-        android:fontFamily="@font/pfdintextcompproregular"
+        android:fontFamily="@font/exoregular"
         android:textColor="@android:color/white"
         android:text="SIGN UP"
         android:textSize="17dp"
@@ -249,7 +251,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginBottom="37dp"
         android:clickable="true"
-        android:fontFamily="@font/pfdintextcompproregular"
+        android:fontFamily="@font/exoregular"
         android:onClick="signin"
         android:text="Already signed up? Sign in."
         android:textColor="@android:color/white" />

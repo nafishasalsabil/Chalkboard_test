@@ -41,13 +41,19 @@ public class Materials extends AppCompatActivity {
         pdf_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),PDFs.class));
+                Intent intent1 = new Intent(getApplicationContext(),PDFs.class);
+                intent1.putExtra("section",sec);
+                intent1.putExtra("title",title);
+                startActivity(intent1);
             }
         });
         exam_ques_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Exam_Questions.class));
+                Intent intent1 = new Intent(getApplicationContext(),Exam_Questions.class);
+                intent1.putExtra("section",sec);
+                intent1.putExtra("title",title);
+                startActivity(intent1);
 
             }
         });

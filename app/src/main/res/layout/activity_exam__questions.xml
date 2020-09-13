@@ -4,94 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Exam_Questions">
+    android:orientation="vertical"
+    tools:context=".PDFs">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_exam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:elevation="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
-    <TextView
+        />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/myListView_exam"
+        android:layout_below="@+id/toolbar_exam"
+        android:divider="#efefef"
+        android:dividerHeight="5dp"
+        android:padding="10dp"
+        >
+
+    </ListView>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addquestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="98dp"
-        android:fontFamily="@font/moonbold"
-        android:text="Attach all Question papers"
-        android:textSize="20sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="167dp"
-        android:layout_marginEnd="88dp"
-        android:fontFamily="@font/moonbold"
-        android:text="Which kind of exam?"
-        android:textColor="@android:color/black"
-        android:textSize="20dp" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </RelativeLayout>
-
-    <Button
-
-        android:layout_width="355dp"
-        android:layout_height="107dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_centerInParent="true"
-        android:layout_marginTop="237dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/prof_button"
-        android:fontFamily="@font/exoregular"
-        android:padding="5sp"
-        android:stateListAnimator="@null"
-        android:text="Quiz"
-        android:textSize="25dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
-
-    <Button
-
-        android:layout_width="357dp"
-        android:layout_height="117dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_centerInParent="true"
-        android:layout_marginTop="366dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/prof_button"
-        android:fontFamily="@font/exoregular"
-        android:padding="5sp"
-        android:stateListAnimator="@null"
-        android:text="Lab"
-        android:textSize="25dp"
-        android:textColor="@android:color/black"
-        android:textStyle="bold" />
-
-    <Button
-
-        android:layout_width="355dp"
-        android:layout_height="107dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-
-        android:layout_centerInParent="true"
-        android:layout_marginTop="503dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/prof_button"
-        android:fontFamily="@font/exoregular"
-        android:padding="5sp"
-        android:stateListAnimator="@null"
-        android:text="Final"
-        android:textColor="@android:color/black"
-        android:textSize="25dp"
-        android:textStyle="bold" />
-
-
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="28dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginBottom="53dp"
+        android:backgroundTint="#3c1414"
+        android:padding="10dp"
+        android:src="@drawable/ic_add_black_24dp" />
 
 </RelativeLayout>

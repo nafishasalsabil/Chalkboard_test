@@ -119,6 +119,8 @@ class ClassAdapter extends FirestoreRecyclerAdapter<CourseInfo,ClassAdapter.Clas
     @Override
     public ClassViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.class_item, parent, false);
+        context = parent.getContext();
+
         return new ClassViewHolder(itemView, onItemClickListener);
     }
 
@@ -140,14 +142,12 @@ class ClassAdapter extends FirestoreRecyclerAdapter<CourseInfo,ClassAdapter.Clas
                 Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.edit_class_layout);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                documentReference = firestore.collection("users").document(userID).collection("Courses").document(classitems.get(position).getCourseTitle());
-
                 EditText editcourseno = (EditText) dialog.findViewById(R.id.edit_courseno);
-               editcourseno.setText(classitems.get(position).getCourseNo());
+               editcourseno.setText(model.getCourseNo());
                 EditText editcoursetype= (EditText) dialog.findViewById(R.id.edit_coursetype);
-                editcoursetype.setText(classitems.get(position).getCourseType());
+                editcoursetype.setText(model.getCourseType());
                 EditText editcredithour = (EditText) dialog.findViewById(R.id.edit_credithours);
-                editcredithour.setText(classitems.get(position).getCredits());
+                editcredithour.setText(model.getCredits());
               //  System.out.println(classitems.get(position).getCredits());
                 Button update = (Button) dialog.findViewById(R.id.updatebutton);
                 Button cancel = (Button) dialog.findViewById(R.id.cancelbutton);
@@ -158,7 +158,9 @@ class ClassAdapter extends FirestoreRecyclerAdapter<CourseInfo,ClassAdapter.Clas
                         if ((isTypeChanged() && isNumberChanged() && isCreditChanged())||( isTypeChanged()&& isNumberChanged())|| (isCreditChanged()&& isTypeChanged())||
                                 (isCreditChanged() && isNumberChanged()) || isTypeChanged() || isNumberChanged() || isCreditChanged()
                         ){
-                       //     Toast.makeText(context,"Your profile has been updated!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context,"Your profile has been updated!", Toast.LENGTH_SHORT).show();
+                            documentReference = firestore.collection("users").document(userID).collection("Courses").document(model.getCourseTitle());
+
                             //!(classitems.get(position).getCourseTitle()).equals(editcoursetitle.getText()) || !(classitems.get(position).getCourseNo()).equals(editcourseno.getText())
                             dialog.dismiss();
 
