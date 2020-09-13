@@ -13,7 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Batch_inside_courses_home_tutor"></activity>
+        <activity android:name=".MyNotes_hometutor"></activity>
+        <activity android:name=".Attendance_record_hometutor" />
+        <activity android:name=".Attendance_activity_hometutor" />
+        <activity android:name=".Attendance_hometutor" />
+        <activity android:name=".Materials_hometutor" />
+        <activity android:name=".Inside_class_home_tutor" />
+        <activity android:name=".Batch_inside_courses_home_tutor" />
         <activity android:name=".Add_New_class_HomeTutor" />
         <activity android:name=".Tutorials" />
         <activity android:name=".ClassPerformance" />
