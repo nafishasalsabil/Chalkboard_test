@@ -67,7 +67,7 @@ Boolean select = false;
                 DocumentReference documentReference = firestore.collection("users").document(userID);
                 Map<String,Object> user = new HashMap<>();
                 user.put("choice",proff);
-                documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         startActivity(new Intent(getApplicationContext(), Features.class));
@@ -113,7 +113,8 @@ Boolean select = false;
                 DocumentReference documentReference = firestore.collection("users").document(userID);
                 Map<String,Object> user = new HashMap<>();
                 user.put("choice",home);
-                documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         startActivity(new Intent(getApplicationContext(), MainActivity_HomeTutor.class));
