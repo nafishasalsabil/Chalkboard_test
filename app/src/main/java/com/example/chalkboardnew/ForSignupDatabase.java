@@ -44,13 +44,6 @@ public class ForSignupDatabase {
         this.password = password;
     }
 
-    public String getid() {
-        return id;
-    }
-
-    public void setid(String id) {
-        this.id = id;
-    }
 
     public String getMessages() {
         return messages;
@@ -68,13 +61,6 @@ public class ForSignupDatabase {
         this.active_status = active_status;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getSearch() {
         return search;
@@ -98,5 +84,13 @@ public class ForSignupDatabase {
 
     public void setChoice(String choice) {
         this.choice = choice;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
