@@ -20,7 +20,7 @@
 
 
         <EditText
-            android:id="@+id/edit_coursename_hometutor"
+            android:id="@+id/edit_classname_hometutor"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_below="@id/edit_courseno"
@@ -29,8 +29,7 @@
             android:background="@drawable/roundededittext"
             android:cursorVisible="true"
             android:gravity="center"
-
-            android:hint="Course Name" />
+            android:hint="Class Name" />
 
 
 
@@ -43,7 +42,7 @@
             android:background="@drawable/roundedbutton"
             android:gravity="center"
             android:padding="10dp"
-            android:id= "@+id/updatebutton"
+            android:id= "@+id/updatebutton_hometutor"
             android:text="update" />
 
         <Button
@@ -53,7 +52,7 @@
             android:layout_marginStart="90dp"
             android:layout_marginTop="-48dp"
             android:background="@drawable/roundedbutton"
-            android:id= "@+id/cancelbutton"
+            android:id= "@+id/cancelbutton_hometutor"
 
             android:gravity="center"
             android:padding="10dp"

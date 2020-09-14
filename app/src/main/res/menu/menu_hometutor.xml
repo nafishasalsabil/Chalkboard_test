@@ -13,7 +13,7 @@
                         android:id="@+id/update_profile"
                         android:title="Update profile"
                         android:icon="@drawable/ic_mode_edit_black_24dp"/>
-                     <item
+                        <item
                         android:id="@+id/logout"
                         android:title="Logout"
                         android:icon="@drawable/ic_logout" />

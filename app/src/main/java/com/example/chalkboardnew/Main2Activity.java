@@ -29,12 +29,15 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
@@ -51,7 +54,8 @@ public  class Main2Activity extends AppCompatActivity implements View.OnClickLis
     private final static int RC_SIGN_IN = 1;
     ProgressBar progressBar;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    FirebaseFirestore firestore;
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     private GoogleApiClient googleApiClient;
 SharedPreferences sharedPreferences;
 
@@ -140,9 +144,9 @@ SharedPreferences sharedPreferences;
                         {
                             if(mAuth.getCurrentUser().isEmailVerified())
                             {
-                                sharedPreferences = getSharedPreferences("selected", Context.MODE_PRIVATE);
+                               /* sharedPreferences = getSharedPreferences("selected", Context.MODE_PRIVATE);
                                 boolean bool= sharedPreferences.getBoolean("lockedState", true);
-                              /*  if(bool == true)
+                              *//*  if(bool == true)
                                 {
                                     System.out.println("helloooooooooooooooooooooooo");
                                     startActivity(new Intent(getApplicationContext(), Features.class));
@@ -150,8 +154,34 @@ SharedPreferences sharedPreferences;
                                 }
                                 else
                                 {*/
-                                    startActivity(new Intent(getApplicationContext(), ChoiceActivity.class));
-                                    Toast.makeText(Main2Activity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+                                String userID = firebaseAuth.getCurrentUser().getUid();
+
+                                DocumentReference documentReference = firestore.collection("users").document(userID);
+                                  documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                      @Override
+                                      public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                          UserClass userClass = documentSnapshot.toObject(UserClass.class);
+                                          userClass.getChoice();
+                                          if(userClass.getChoice().equals("Professional teacher"))
+                                          {
+                                              startActivity(new Intent(getApplicationContext(), Features.class));
+                                              Toast.makeText(Main2Activity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+
+                                          }
+                                          else if(userClass.getChoice().equals("Home tutor"))
+                                          {
+                                              startActivity(new Intent(getApplicationContext(), MainActivity_HomeTutor.class));
+                                              Toast.makeText(Main2Activity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+
+                                          }
+                                          else
+                                          {
+                                              startActivity(new Intent(getApplicationContext(), ChoiceActivity.class));
+                                              Toast.makeText(Main2Activity.this, "Sign in successful!", Toast.LENGTH_SHORT).show();
+
+                                          }
+                                      }
+                                  });
 
                       //          }
 

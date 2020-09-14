@@ -4,16 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,14 +26,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ImageView img;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
 
     @Override
     protected void onStart() {
         super.onStart();
         if(firebaseUser != null) {
-            Intent intent = new Intent(getApplicationContext(), Features.class);
+            String userID = firebaseAuth.getCurrentUser().getUid();
 
-            startActivity(intent);
+            DocumentReference documentReference = firestore.collection("users").document(userID);
+            documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                   UserClass doc = documentSnapshot.toObject(UserClass.class);
+                  //  System.out.println(doc.getChoice());
+                    Log.d("checkChoice",doc.getChoice());
+                    if(doc.getChoice().equals("Professional teacher"))
+                    {
+                        Intent intent = new Intent(getApplicationContext(), Features.class);
+
+                        startActivity(intent);
+                    }
+                    else if(doc.getChoice().equals("Home tutor"))
+                    {
+                        Intent intent = new Intent(getApplicationContext(), MainActivity_HomeTutor.class);
+
+                        startActivity(intent);
+
+                    }
+                }
+            });
+
         }
         /*else
         {

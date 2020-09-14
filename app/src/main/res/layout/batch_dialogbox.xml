@@ -19,7 +19,7 @@
         android:padding="26dp">
 
         <EditText
-            android:id="@+id/batch_no_edittext"
+            android:id="@+id/batch_name_edittext"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="20dp"
@@ -27,7 +27,30 @@
             android:cursorVisible="true"
             android:gravity="center"
 
-            android:hint="Batch No" />
+            android:hint="Batch Name" />
+        <EditText
+            android:id="@+id/batch_no_of_days_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/roundededittext"
+            android:cursorVisible="true"
+            android:gravity="center"
+
+            android:hint="Number of Days" />
+
+        <EditText
+            android:id="@+id/batch_days_edittext"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/roundededittext"
+            android:cursorVisible="true"
+            android:gravity="center"
+
+            android:hint="Days" />
+
+
 
         <EditText
             android:id="@+id/batch_time_edittext"
@@ -57,7 +80,7 @@
         <Button
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/batch_no_edittext"
+            android:layout_below="@id/batch_name_edittext"
             android:layout_marginTop="15dp"
             android:background="@drawable/roundedbutton"
             android:gravity="center"

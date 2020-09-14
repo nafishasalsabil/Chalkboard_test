@@ -31,7 +31,7 @@
         />
 
     <TextView
-        android:id = "@+id/ash1"
+        android:id = "@+id/abh12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
