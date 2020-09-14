@@ -146,6 +146,7 @@ public class SignupActivity extends AppCompatActivity {
                                             user.put("active_status","offline");
                                             user.put("search",usern.toLowerCase());
                                             user.put("imageUrl","not_selected");
+                                            user.put("choice","not_selected");
 
 
                                          /*   ChatUser chatUser = new ChatUser();
