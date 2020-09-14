@@ -32,31 +32,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         if(firebaseUser != null) {
+           /* Intent intent = new Intent(getApplicationContext(), MainActivity_HomeTutor.class);
+
+            startActivity(intent);
+*/
             String userID = firebaseAuth.getCurrentUser().getUid();
 
             DocumentReference documentReference = firestore.collection("users").document(userID);
             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
-                   UserClass doc = documentSnapshot.toObject(UserClass.class);
+                   ForSignupDatabase doc = documentSnapshot.toObject(ForSignupDatabase.class);
                   //  System.out.println(doc.getChoice());
-                    Log.d("checkChoice",doc.getChoice());
-                    if(doc.getChoice().equals("Professional teacher"))
+                 //   Log.d("checkChoice",doc.getChoice());
+                    if(doc.getChoice()!=null)
                     {
-                        Intent intent = new Intent(getApplicationContext(), Features.class);
+                        if(doc.getChoice().equals("Professional teacher"))
+                        {
+                            Intent intent = new Intent(getApplicationContext(), Features.class);
 
-                        startActivity(intent);
+                            startActivity(intent);
+                        }
+                        else if(doc.getChoice().equals("Home tutor"))
+                        {
+                            Intent intent = new Intent(getApplicationContext(), MainActivity_HomeTutor.class);
+
+                            startActivity(intent);
+
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(getApplicationContext(), ChoiceActivity.class);
+
+                            startActivity(intent);
+
+                        }
                     }
-                    else if(doc.getChoice().equals("Home tutor"))
-                    {
-                        Intent intent = new Intent(getApplicationContext(), MainActivity_HomeTutor.class);
 
-                        startActivity(intent);
 
-                    }
                 }
             });
-
         }
         /*else
         {
