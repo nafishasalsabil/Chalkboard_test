@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="6dp"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="10dp">
 
         <TextView
             android:id="@+id/batchname"
@@ -35,6 +35,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/exoregular"
             android:text="Batch title"
+            android:textStyle="bold"
+            android:padding="6dp"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 

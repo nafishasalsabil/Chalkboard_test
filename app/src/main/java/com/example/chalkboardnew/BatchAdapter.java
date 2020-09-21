@@ -1,26 +1,38 @@
 package com.example.chalkboardnew;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHolder> {
+class BatchAdapter extends FirestoreRecyclerAdapter<BatchClass,BatchAdapter.BatchViewHolder> {
 
     Context context;
-    List<BatchClass> batch;
+    List<SectionClass> section;
 
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
@@ -29,6 +41,29 @@ class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHolder> {
     DocumentReference documentReference;
 
     private OnItemClickListener onItemClickListener;
+   static String title;
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /**
+     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
+     * FirestoreRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public BatchAdapter(@NonNull FirestoreRecyclerOptions<BatchClass> options) {
+        super(options);
+    }
+
+    @Override
+    protected void onBindViewHolder(@NonNull BatchViewHolder holder, int position, @NonNull BatchClass model) {
+        holder.batch_title.setText(model.getBatchName());
+        holder.batch_days.setText(model.getBatchDays());
+        holder.batch_time.setText(model.getBatchTime());
+
+    }
 
     public interface OnItemClickListener {
 
@@ -40,17 +75,21 @@ class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHolder> {
         this.onItemClickListener = onItemClickListener;
     }
 
-    public BatchAdapter(Context context, List<BatchClass> batch) {
-        this.batch = batch;
-        this.context = context;
+    /* public SectionAdapter(Context context, List<SectionClass> section) {
+         this.section = section;
+         this.context = context;
 
 
+     }*/
+    public void deleteItem(int position) {
+        getSnapshots().getSnapshot(position).getReference().delete();
     }
 
 
     public static class BatchViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         TextView batch_title,batch_days,batch_time;
+
 
 
         public BatchViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
@@ -64,9 +103,12 @@ class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHolder> {
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(),Inside_class_home_tutor.class);
                     intent.putExtra("section",batch_title.getText());
+                    intent.putExtra("title",title);
+
                     v.getContext().startActivity(intent);
 
                 }
+
             });
         }
     }
@@ -76,21 +118,20 @@ class BatchAdapter extends RecyclerView.Adapter<BatchAdapter.BatchViewHolder> {
     public BatchViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.batch_item, parent, false);
         return new BatchViewHolder(itemView, onItemClickListener);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull BatchViewHolder holder, int position) {
-        holder.batch_title.setText(batch.get(position).getBatchName());
-        holder.batch_days.setText(batch.get(position).getBatchDays());
-        holder.batch_time.setText(batch.get(position).getBatchTime());
-
-
 
     }
 
+    /*  @Override
+      public void onBindViewHolder(@NonNull SectionViewHolder holder, int position) {
+          holder.section_name.setText(section.get(position).getSection());
 
-    @Override
+
+      }
+  */
+
+
+   /* @Override
     public int getItemCount() {
-        return batch.size();
-    }
+        return section.size();
+    }*/
 }

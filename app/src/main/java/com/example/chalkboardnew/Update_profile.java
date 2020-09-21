@@ -51,7 +51,6 @@ public class Update_profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
         username = findViewById(R.id.username);
-        email = findViewById(R.id.email);
         password = findViewById(R.id.password);
         update = findViewById(R.id.update);
      //   firebaseAuth = FirebaseAuth.getInstance();
@@ -69,7 +68,6 @@ public class Update_profile extends AppCompatActivity {
                     pw = documentSnapshot.getString("password");
                     username.setText(un);
                     password.setText(pw);
-                    email.setText(em);
 
                 }
             }
@@ -115,9 +113,8 @@ public class Update_profile extends AppCompatActivity {
     }
 
     private void update() {
-        if (isNameChanged() && isPassChanged() && isMailChanged() || isNameChanged() && isPassChanged()
-                || isPassChanged() && isMailChanged() || isMailChanged() && isNameChanged()
-                || isNameChanged()|| isPassChanged() || isMailChanged()) {
+        if (isNameChanged() && isPassChanged()
+                || isNameChanged()|| isPassChanged() ) {
             Toast.makeText(this, "Your profile has been updated!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -146,16 +143,7 @@ public class Update_profile extends AppCompatActivity {
 
     }
 
-    private boolean isMailChanged() {
-        if (!em.equals(email.getText().toString())) {
-           // usernameref.child("email").setValue(email.getText().toString());
-           String changemail = email.getText().toString();
-           documentReference.update("email",changemail);
-            return true;
-        } else {
-            return false;
-        }
-    }
+
 
 
 }

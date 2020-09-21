@@ -77,12 +77,7 @@ class NotesAdapter extends FirestoreRecyclerAdapter<NotesClass,NotesAdapter.Note
     }
 
 
- /*   public NotesAdapter(Context context, List<NotesClass> notes) {
-        this.notes = notes;
-        this.context = context;
 
-
-    }*/
 
     public void setState(String state) {
         this.state = state;
@@ -123,38 +118,7 @@ class NotesAdapter extends FirestoreRecyclerAdapter<NotesClass,NotesAdapter.Note
         return new NotesViewHolder(itemView, onItemClickListener);
     }
 
-   /* @Override
-    public void onBindViewHolder(@NonNull NotesViewHolder holder, int position) {
-        holder.note_title.setText(notes.get(position).getNoteTitle());
-        holder.note_subtitle.setText(notes.get(position).getSubtitle());
-        holder.my_note.setText(notes.get(position).getMynote());
-        holder.url.setText(notes.get(position).getUrl());
-        holder.date.setText(notes.get(position).getDate());
-        if (notes.get(position).getUrl().equals("No url added"))
-        {
-            holder.url.setVisibility(View.GONE);
 
-        }
-        else
-        {
-            holder.url.setVisibility(View.VISIBLE);
-            Linkify.addLinks(holder.url, Linkify.WEB_URLS);
-            holder.url.setLinkTextColor(Color.parseColor("#85BFB4"));
-
-
-        }
-
-
-        // System.out.println(position);
-        //  System.out.println(holder.getAdapterPosition());
-
-        // setPos(holder.getAdapterPosition());
-
-        //    holder.editcoursetitle.setText(classitems.get(position).getCourseTitle());
-        // holder.editcourseno.setText(classitems.get(position).getCourseNo());
-
-    }
-*/
     @Override
     protected void onBindViewHolder(@NonNull NotesViewHolder holder, int position, @NonNull NotesClass model) {
         holder.note_title.setText(model.getNoteTitle());
@@ -179,8 +143,4 @@ class NotesAdapter extends FirestoreRecyclerAdapter<NotesClass,NotesAdapter.Note
     }
 
 
-   /* @Override
-    public int getItemCount() {
-        return notes.size();
-    }
-*/}
+ }

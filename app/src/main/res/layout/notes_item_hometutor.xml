@@ -28,7 +28,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/notes_title"
+                    android:id="@+id/notes_title_ht"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Note Title"
@@ -38,7 +38,19 @@
                     android:textColor="@android:color/black"
                     android:fontFamily="@font/exoregular"/>
                 <TextView
-                    android:id="@+id/notes_subtitle"
+                    android:id="@+id/notes_date_ht"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Note Date"
+                    android:padding="5dp"
+                    android:background="#464646"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/white"
+                    android:fontFamily="@font/exoregular"/>
+
+
+                <TextView
+                    android:id="@+id/notes_subtitle_ht"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="subtitle"
@@ -49,7 +61,7 @@
                     android:fontFamily="@font/exoregular"
                     android:textColor="@android:color/white"/>
                 <TextView
-                    android:id="@+id/url_tv"
+                    android:id="@+id/url_tv_ht"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="url"
@@ -61,7 +73,7 @@
                     android:fontFamily="@font/exoregular"/>
 
                 <TextView
-                    android:id="@+id/mynotes"
+                    android:id="@+id/mynotes_ht"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="notes"

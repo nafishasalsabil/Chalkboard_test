@@ -14,9 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CGPACalculator"></activity>
+        <activity android:name=".MessageActivityHomeTutor"></activity>
+        <activity android:name=".StudentInfoHomeTutor" />
+        <activity android:name=".ResultsHomeTutor" />
+        <activity android:name=".ExamQuestionHomeTutor" />
+        <activity android:name=".CreateNoteActivityHomeTutor" />
+        <activity android:name=".TutorialsHomeTutor" />
+        <activity android:name=".PDFsHomeTutor" />
+        <activity android:name=".All_Students_All_Records_Home_Tutor" />
+        <activity android:name=".StudentListHometutor" />
+        <activity android:name=".CGPACalculator" />
         <activity android:name=".AddReminder" />
-        <activity android:name=".AddPostActivity"></activity>
+        <activity android:name=".AddPostActivity" />
         <activity android:name=".layout_add_tutorial_links_hometutor" />
         <activity android:name=".CreateNoteHometutor" />
         <activity android:name=".Add_new_students_hometutor" />
@@ -32,24 +41,27 @@
         <activity android:name=".EditNoteActivity" />
         <activity android:name=".ClassPerformance" />
         <activity android:name=".MainActivity_HomeTutor" />
+
         <service
             android:name=".Notifications.MyFirebaseIdService"
-            android:exported="true"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service
             android:name=".Notifications.MyFirebaseMessagingService"
-            android:exported="true"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <activity android:name=".UserProfile" />
+        <activity android:name=".UserProfileHomeTutor" />
+
         <activity android:name=".MessageActivity" />
         <activity android:name=".StudentList" />
         <activity android:name=".QuizMarksRecord" />
@@ -62,16 +74,13 @@
         <activity
             android:name=".CreateNoteActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".MyNotes"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Exam_Questions" />
         <activity android:name=".PDFs" />
-
         <activity android:name=".Materials" />
         <activity android:name=".AddNewStudents" />
         <activity android:name=".Attendance_activity" />
@@ -79,6 +88,7 @@
         <activity android:name=".InsideClassActivity" />
         <activity android:name=".AddClassesActivity" />
         <activity android:name=".Update_profile" />
+        <activity android:name=".Update_profile_homeTutor" />
         <activity android:name=".ChoiceActivity" />
         <activity android:name=".Student_Attendance" />
         <activity android:name=".Attendance" />

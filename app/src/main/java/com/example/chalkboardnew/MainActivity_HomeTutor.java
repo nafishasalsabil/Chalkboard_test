@@ -261,6 +261,14 @@ toolbar_features_hometutor = findViewById(R.id.toolbar_features_hometutor);
                     public void onFailure(@NonNull Exception e) {
                     }
                 });
+        profilepic_tutor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),UserProfileHomeTutor.class);
+                intent.putExtra("username",u);
+                startActivity(intent);
+            }
+        });
 
         setSupportActionBar(toolbar_features_hometutor);
         //  getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#EFF3FB")));
@@ -345,7 +353,7 @@ toolbar_features_hometutor = findViewById(R.id.toolbar_features_hometutor);
         }
         switch (item.getItemId()) {
             case R.id.update_profile:
-                startActivity(new Intent(getApplicationContext(), Update_profile.class));
+                startActivity(new Intent(getApplicationContext(), Update_profile_homeTutor.class));
                 break;
         }
         return true;

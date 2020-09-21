@@ -281,8 +281,8 @@ public class Features extends AppCompatActivity implements GoogleApiClient.OnCon
 
                }
                if (u.startsWith("p") || u.startsWith("P")) {
-                   toolbar_features.setNavigationIcon(R.drawable.p);
-                   profilepic.setImageResource(R.drawable.p);
+                   toolbar_features.setNavigationIcon(R.drawable.p_un);
+                   profilepic.setImageResource(R.drawable.p_un);
 
                }
                if (u.startsWith("q") || u.startsWith("Q")) {

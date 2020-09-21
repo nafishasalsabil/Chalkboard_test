@@ -9,7 +9,7 @@
     tools:context=".Attendance_activity_hometutor">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_attendance"
+        android:id="@+id/toolbar_attendance_ht"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
@@ -30,7 +30,7 @@
 
 
         <RelativeLayout
-            android:id="@+id/present_layout"
+            android:id="@+id/present_layout_ht"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginLeft="0dp"
@@ -40,7 +40,7 @@
 
 
             <TextView
-                android:id="@+id/present_student_count"
+                android:id="@+id/present_student_count_ht"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -68,7 +68,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/absent_layout"
+            android:id="@+id/absent_layout_ht"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginLeft="10dp"
@@ -78,7 +78,7 @@
 
 
             <TextView
-                android:id="@+id/absent_student_count"
+                android:id="@+id/absent_student_count_ht"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -106,7 +106,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/late_layout"
+            android:id="@+id/late_layout_ht"
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:layout_marginLeft="10dp"
@@ -117,7 +117,7 @@
 
 
             <TextView
-                android:id="@+id/late_student_count"
+                android:id="@+id/late_student_count_ht"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -155,7 +155,7 @@
 
 
         <ListView
-            android:id="@+id/students_recycler_view"
+            android:id="@+id/students_recycler_view_ht"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
@@ -203,7 +203,7 @@
 
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/attendance_done_fab"
+            android:id="@+id/attendance_done_fab_ht"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#8CBEB5"

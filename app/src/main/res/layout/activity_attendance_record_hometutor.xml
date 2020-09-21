@@ -15,7 +15,7 @@
              />
        -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_r"
+        android:id="@+id/toolbar_r_ht"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
@@ -25,11 +25,11 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/attendance_record_recyclerview"
+        android:id="@+id/attendance_record_recyclerview_ht"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar_r"/>
+        android:layout_below="@+id/toolbar_r_ht"/>
 
 
 
