@@ -146,7 +146,7 @@ class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.student
                 dialog.show();
                 CollectionReference collectionReference =  firestore.collection("users").document(userID)
                         .collection("Courses").document(title)
-                        .collection("Sections").document(section)
+                        .collection("Batches").document(section)
                         .collection("Class_Performance").document(holder.roll.getText().toString())
                         .collection("Backup");
                 collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -165,7 +165,7 @@ class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.student
                 });
                 CollectionReference collectionReference2 =  firestore.collection("users").document(userID)
                         .collection("Courses").document(title)
-                        .collection("Sections").document(section)
+                        .collection("Batches").document(section)
                         .collection("Class_Performance");
                 collectionReference2.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

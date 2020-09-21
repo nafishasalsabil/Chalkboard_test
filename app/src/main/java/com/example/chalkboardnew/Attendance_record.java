@@ -49,12 +49,7 @@ public class Attendance_record extends AppCompatActivity {
                 finish();
             }
         });
-        toolbar_record.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
         Intent intent = getIntent();
         String title = intent.getStringExtra("title");
         String section = intent.getStringExtra("section");

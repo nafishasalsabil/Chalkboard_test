@@ -14,12 +14,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <include
-            android:id="@+id/inside_class_toolbar"
+            android:id="@+id/inside_class_toolbar_hometutor"
             layout="@layout/toolbar" />
 
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/attendance_cardview"
+            android:id="@+id/attendance_cardview_hometutor"
             android:layout_width="match_parent"
             android:layout_height="175dp"
             android:layout_marginLeft="20dp"
@@ -64,7 +64,7 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/materials_cardview"
+            android:id="@+id/materials_cardview_hometutor"
             android:layout_height="175dp"
             android:layout_width="match_parent"
             android:layout_marginLeft="20dp"
@@ -108,7 +108,7 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/results_cardview"
+            android:id="@+id/results_cardview_hometutor"
             android:layout_height="175dp"
             android:layout_width="match_parent"
             android:layout_marginLeft="20dp"
@@ -152,7 +152,7 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
-            android:id="@+id/studentinfo_cardview"
+            android:id="@+id/studentinfo_cardview_hometutor"
             android:layout_height="175dp"
             android:layout_width="match_parent"
             android:layout_marginLeft="20dp"

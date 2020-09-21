@@ -41,7 +41,7 @@
                     android:id="@+id/notes_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Note Title"
+                    android:text="Note Date"
                     android:padding="5dp"
                     android:background="#464646"
                     android:textSize="14sp"

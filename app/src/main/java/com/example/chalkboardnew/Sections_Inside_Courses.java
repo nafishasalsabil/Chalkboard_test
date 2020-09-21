@@ -40,7 +40,6 @@ import java.util.Map;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
-import static com.example.chalkboardnew.Attendance_activity.clicked_courseTitle;
 
 public class Sections_Inside_Courses extends AppCompatActivity {
     TextView t1;
@@ -149,26 +148,6 @@ public class Sections_Inside_Courses extends AppCompatActivity {
 
             }
 
-           /* int position = viewHolder.getAdapterPosition();
-            switch(direction)
-            {
-                case ItemTouchHelper.LEFT:
-                    String course_name = classitems.get(position).getCourseTitle();
-                    archive.add(course_name);
-                    classitems.remove(position);
-                    classAdapter.notifyItemRemoved(position);
-                    Snackbar.make(recyclerView,course_name+" Archived", Snackbar.LENGTH_LONG)
-                           *//* .setAction("Undo", new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    archive.remove(archive.lastIndexOf(course_name));
-                                    classitems.;
-                                }
-                            }).show()*//*;
-
-
-            }
-*/
 
         }
 

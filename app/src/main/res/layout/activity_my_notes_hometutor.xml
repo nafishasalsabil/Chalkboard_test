@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/LayoutSearch_hometutor"
+        android:id="@+id/LayoutSearch_hometutor_ht"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textMyNotes_hometutor"
@@ -63,15 +63,15 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notesRecyclerView"
+        android:id="@+id/notesRecyclerView_ht"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_marginEnd="2dp"
         android:clipToPadding="false"
         android:visibility="visible"
-        android:layout_below="@+id/LayoutSearch_hometutor"
-        app:layout_constraintTop_toBottomOf="@+id/LayoutSearch_hometutor" />
+        android:layout_below="@+id/LayoutSearch_hometutor_ht"
+        />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
