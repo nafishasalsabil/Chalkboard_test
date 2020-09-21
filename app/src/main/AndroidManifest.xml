@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".layout_add_tutorial_links_hometutor"></activity>
+        <activity android:name=".AddPostActivity"></activity>
+        <activity android:name=".layout_add_tutorial_links_hometutor" />
         <activity android:name=".CreateNoteHometutor" />
         <activity android:name=".Add_new_students_hometutor" />
         <activity android:name=".MyNotes_hometutor" />
@@ -28,18 +29,19 @@
         <activity android:name=".Tutorials" />
         <activity android:name=".ClassPerformance" />
         <activity android:name=".MainActivity_HomeTutor" />
+
         <service
             android:name=".Notifications.MyFirebaseIdService"
-            android:exported="true"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service
             android:name=".Notifications.MyFirebaseMessagingService"
-            android:exported="true"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -58,16 +60,13 @@
         <activity
             android:name=".CreateNoteActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".MyNotes"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Exam_Questions" />
         <activity android:name=".PDFs" />
-
         <activity android:name=".Materials" />
         <activity android:name=".AddNewStudents" />
         <activity android:name=".Attendance_activity" />

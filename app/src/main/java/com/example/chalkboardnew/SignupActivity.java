@@ -156,7 +156,7 @@ public class SignupActivity extends AppCompatActivity {
                                          */
                                             System.out.println(userID);
                                          ForSignupDatabase forSignupDatabase = new ForSignupDatabase();
-                                         forSignupDatabase.setid(userID);
+                                         forSignupDatabase.setId(userID);
                                          documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
