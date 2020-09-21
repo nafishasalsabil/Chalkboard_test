@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_notice"
+        android:id="@+id/notice_recyclerview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -20,11 +20,5 @@
         android:backgroundTint="#3c1414"
         android:padding="10dp"
         android:src="@drawable/ic_add_black_24dp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notice_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
 
 </RelativeLayout>
