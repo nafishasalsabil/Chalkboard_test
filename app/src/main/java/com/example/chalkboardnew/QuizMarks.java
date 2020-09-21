@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -27,6 +28,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -50,6 +52,7 @@ public class QuizMarks extends AppCompatActivity {
     List<QuizNameClass> quizItems = new ArrayList<>();
     TextView t1;
     Toolbar toolbar_quiz;
+    List<QuizMarksClass> studentItems1 = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +116,8 @@ public class QuizMarks extends AppCompatActivity {
                 Button add_quiz_done = view.findViewById(R.id.done_quiz_add);
                 EditText quiz_name =view. findViewById(R.id.quiz_name_edittext);
                 TextView quiz_date = view.findViewById(R.id.quiz_date_textview);
+                EditText total_marks =view. findViewById(R.id.total_marks);
+
                 quiz_date.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -141,6 +146,7 @@ public class QuizMarks extends AppCompatActivity {
                     public void onClick(View v) {
                         String q_n = quiz_name.getText().toString();
                         String q_d = quizNameClass.getQuiz_date();
+                       int q = Integer.parseInt(total_marks.getText().toString());
                         if (TextUtils.isEmpty(q_n)) {
                             quiz_name.setError("Quiz name is required");
                             return;
@@ -149,16 +155,81 @@ public class QuizMarks extends AppCompatActivity {
                             quiz_date.setError("Quiz date is required");
                             return;
                         }
+                        if (TextUtils.isEmpty(total_marks.getText().toString())) {
+                            total_marks.setError("Quiz marks is required");
+                            return;
+                        }
                         DocumentReference documentReference = firestore.collection("users").document(userID)
                                 .collection("Courses").document(title_course)
                                 .collection("Sections").document(sec).collection("Quizes").document(q_n);
+
                         Map<String, Object> user = new HashMap<>();
                         user.put("quiz", q_n);
                         user.put("quiz_date",q_d);
+                        user.put("quiz_total_marks",q);
                         documentReference.set(user);
+                        QuizNameClass quizNameClass = new QuizNameClass(q_n,q_d,q);
+                        quizMarksAdapter = new QuizMarksAdapter(getApplicationContext(), quizItems);
+                        quiz_recylerview.setAdapter(quizMarksAdapter);
+                        quizItems.add(quizNameClass);
+                        quizMarksAdapter.notifyDataSetChanged();
+
+
+
 
                         dialog.dismiss();
+                        CollectionReference     studentcollection = firestore.collection("users").document(userID)
+                                .collection("Courses").document(title_course).collection("Sections")
+                                .document(sec)
+                                .collection("Students");
 
+
+                          studentcollection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots)
+                                {
+                                    QuizMarksClass items = documentSnapshot.toObject(QuizMarksClass.class);
+
+                                    studentItems1.add(items);
+                                    System.out.println(studentItems1);
+                                    DocumentReference documentReference =  firestore.collection("users").document(userID)
+                                            .collection("Courses").document(title_course).collection("Sections")
+                                            .document(sec)
+                                            .collection("Quizes").document(q_n).collection("Students").document(Integer.toString(items.getId()));
+                                    System.out.println(items.getId());
+                                    Log.d("checkO",Integer.toString(items.getId()));
+                                    Log.d("checkO",Integer.toString(studentItems1.size()));
+
+                                    for(int i=0;i<studentItems1.size();i++) {
+                                        Map<String, Object> user = new HashMap<>();
+                                        user.put("id", items.getId());
+                                        user.put("name", items.getName());
+                                        user.put("marks", 0);
+                                        documentReference.set(user);
+
+                                        DocumentReference documentReference1 = firestore.collection("users").document(userID)
+                                                .collection("Courses").document(title_course).collection("Sections")
+                                                .document(sec)
+                                                .collection("Class_Performance")
+                                                .document(Integer.toString(items.getId()))
+                                                .collection("quizes").document(q_n);
+
+
+                                        Map<String, Object> user1 = new HashMap<>();
+                                        user1.put("id", items.getId());
+                                        user1.put("name", items.getName());
+                                        user1.put("marks", 0);
+                                        user1.put("total", q);
+                                        user1.put("quiz_name",q_n);
+                                        documentReference1.set(user1);
+                                    }
+
+                                }
+
+
+                            }
+                        });
 
 
 

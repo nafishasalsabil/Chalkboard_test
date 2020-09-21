@@ -16,6 +16,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,6 +37,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -51,10 +53,14 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static com.example.chalkboardnew.Attendance_activity.clicked_courseTitle;
+import static com.example.chalkboardnew.Attendance_activity.clicked_course_section;
 
 public class StudentList extends AppCompatActivity {
     com.getbase.floatingactionbutton.FloatingActionsMenu fab;
@@ -342,8 +348,8 @@ Button done;
         Button add = view.findViewById(R.id.add);
 
         cancel.setOnClickListener(v -> dialog.dismiss());
-        add.setOnClickListener(v -> {
-            addstudent();
+        add.setOnClickListener((View v) -> {
+           // addstudent();
          /*   present.setVisibility(View.VISIBLE);
             absent.setVisibility(View.VISIBLE);
             late.setVisibility(View.VISIBLE);
@@ -351,45 +357,66 @@ Button done;
           /*  t1.setVisibility(View.GONE);
             t2.setVisibility(View.GONE);
           */  fab.setVisibility(View.INVISIBLE);
+            String d_d = studentItems_object.getLecture_date();
+            if(TextUtils.isEmpty(id.getText()))
+            {
+                id.setError("Empty!");
+            }
+            else if(TextUtils.isEmpty(name.getText()))
+            {
+                name.setError("Empty!");
+            }
+            else {
+
+                id1 = Integer.parseInt(id.getText().toString());
+                String name1 = name.getText().toString();
+
+                String l_l = studentItems_object.getLecture_name();
+                studentItems_object.setName(name1);
+                studentItems_object.setId(id1);
+                studentItems.add(new StudentItems(id1, name1, "not_taken", l_l, d_d));
+                studentListAdapter.notifyDataSetChanged();
+
+                studentsdocument = firestore.collection("users").document(userID)
+                        .collection("Courses").document(clicked_courseTitle)
+                        .collection("Sections").document(clicked_course_section)
+                        .collection("Students").document(Integer.toString(id1));
+                Map<String, Object> inuser = new HashMap<>();
+                inuser.put("id", id1);
+                inuser.put("name", name1);
+
+                studentsdocument.set(inuser).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(getApplicationContext(), "The student is added!", Toast.LENGTH_SHORT).show();
+                        DocumentReference documentReference4 = firestore.collection("users").document(userID)
+                                .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                                .collection("Class_Performance").document(Integer.toString(id1));
+                        Map<String, Object> perf = new HashMap<>();
+                        perf.put("id", id1);
+                        perf.put("name", name1);
+                        perf.put("count",0);
+                        documentReference4.set(perf);
+                        dialog.dismiss();
+                    }
+                });
+            }
+            //  StudentItems studentItems = new StudentItems();
+
+//        System.out.println(Lecture);
+            //String lec = lecture_method();
+            //  lecture_method();
 
 
-            dialog.dismiss();
+
+
 
 
         });
     }
     private void addstudent() {
-        id1 = Integer.parseInt(id.getText().toString());
-        String name1 = name.getText().toString();
         //object.setStudent_name(name1);
         //  object.setStudent_id(id1);
-        String d_d = studentItems_object.getLecture_date();
-        String l_l = studentItems_object.getLecture_name();
-        studentItems_object.setName(name1);
-        studentItems_object.setId(id1);
-        studentItems.add(new StudentItems(id1, name1, "", l_l, d_d));
-        studentListAdapter.notifyDataSetChanged();
-
-        studentsdocument = firestore.collection("users").document(userID)
-                .collection("Courses").document(clicked_courseTitle)
-                .collection("Sections").document(clicked_course_section)
-                .collection("Students").document(Integer.toString(id1));
-        Map<String, Object> inuser = new HashMap<>();
-        inuser.put("id", id1);
-        inuser.put("name", name1);
-
-        studentsdocument.set(inuser).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Toast.makeText(getApplicationContext(), "The student is added!", Toast.LENGTH_SHORT).show();
-
-            }
-        });
-        //  StudentItems studentItems = new StudentItems();
-
-//        System.out.println(Lecture);
-        //String lec = lecture_method();
-        //  lecture_method();
 
 
     }
@@ -404,11 +431,29 @@ Button done;
         TextView lecture_text = view.findViewById(R.id.lecture_edittext);
         Button done_button = (Button) view.findViewById(R.id.done_lecture);
         TextView date_textview = view.findViewById(R.id.date_textview);
+        final Calendar newCalender = Calendar.getInstance();
 
         date_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePicker datePicker = new DatePicker(StudentList.this);
+                DatePickerDialog dialog = new DatePickerDialog(StudentList.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, final int year, final int month, final int dayOfMonth) {
+
+                        final Calendar newDate = Calendar.getInstance();
+                        Calendar newTime = Calendar.getInstance();
+                        String date_date = dayOfMonth + "/" + (month + 1) + "/" + year;
+                        date_textview.setText(date_date);
+                        studentItems_object.setLecture_date(date_date);
+
+
+                    }
+                },newCalender.get(Calendar.YEAR),newCalender.get(Calendar.MONTH),newCalender.get(Calendar.DAY_OF_MONTH));
+
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                dialog.show();
+
+              /*  DatePicker datePicker = new DatePicker(StudentList.this);
                 int day = datePicker.getDayOfMonth();
                 int month = (datePicker.getMonth()) + 1;
                 int year = datePicker.getYear();
@@ -423,7 +468,7 @@ Button done;
 
                     }
                 }, day, month, year);
-                datePickerDialog.show();
+                datePickerDialog.show();*/
             }
         });
 
@@ -472,6 +517,35 @@ Button done;
                     @Override
                     public void onSuccess(Void aVoid) {
                         //   Toast.makeText(Attendance_activity.this, "The student is added!", Toast.LENGTH_SHORT).show();
+                        studentcollection = firestore.collection("users").document(userID)
+                                .collection("Courses").document(clicked_courseTitle).collection("Sections")
+                                .document(clicked_course_section)
+                                .collection("Students");
+                        studentcollection.orderBy("id", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                List<StudentItems> documentData = queryDocumentSnapshots.toObjects(StudentItems.class);
+                                studentItems.addAll(documentData);
+                                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+
+                                    StudentItems studentItems1 = documentSnapshot.toObject(StudentItems.class);
+                                    DocumentReference documentReference3 = firestore.collection("users").document(userID)
+                                            .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                                            .collection("Attendance").document(Lecture_s).collection("Status").document(Integer.toString(studentItems1.getId()));
+                                    Map<String, Object> inuser = new HashMap<>();
+                                    inuser.put("id", studentItems1.getId());
+                                    inuser.put("name", studentItems1.getName());
+                                    inuser.put("status", "not_taken");
+
+                                    documentReference3.set(inuser);
+
+
+
+                                }
+                            }
+                        });
+
+
 
                     }
                 });

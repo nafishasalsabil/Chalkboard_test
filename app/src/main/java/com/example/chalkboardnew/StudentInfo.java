@@ -110,6 +110,8 @@ Toolbar toolbar_info;
                 studentInfoAdapter = new StudentInfoAdapter(getApplicationContext(), studentItems);
                 info_recycler_view.setAdapter(studentInfoAdapter);
                 studentItems.addAll(documentData);
+                studentInfoAdapter.setTitle(title);
+                studentInfoAdapter.setSection(section);
                 studentInfoAdapter.notifyDataSetChanged();
                 if (studentInfoAdapter.getItemCount() == 0) {
                     t1.setVisibility(View.VISIBLE);

@@ -1,17 +1,18 @@
 package com.example.chalkboardnew;
 
 public class NotesClass {
-    String noteTitle,subtitle,date,mynote,url;
+    String noteTitle,subtitle,date,mynote,url,search;
 
     public NotesClass() {
     }
 
-    public NotesClass(String noteTitle, String subtitle, String date, String mynote, String url) {
+    public NotesClass(String noteTitle, String subtitle, String date, String mynote, String url, String search) {
         this.noteTitle = noteTitle;
         this.subtitle = subtitle;
         this.date = date;
         this.mynote = mynote;
         this.url = url;
+        this.search = search;
     }
 
     public String getNoteTitle() {
@@ -52,6 +53,14 @@ public class NotesClass {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 
     @Override

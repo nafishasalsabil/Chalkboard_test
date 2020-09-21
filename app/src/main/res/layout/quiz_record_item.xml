@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginTop="35dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="80dp"
             android:fontFamily="@font/exoregular"
             android:text="marks "
             android:gravity="center"
@@ -77,10 +77,10 @@
 
         <ImageView
             android:id="@+id/add_marks"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="25dp"
             android:src="@drawable/ic_more"
             />

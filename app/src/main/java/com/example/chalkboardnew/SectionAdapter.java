@@ -18,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionViewHolder> {
+class SectionAdapter extends FirestoreRecyclerAdapter<SectionClass,SectionAdapter.SectionViewHolder> {
 
     Context context;
     List<SectionClass> section;
@@ -40,6 +42,16 @@ class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionViewHold
 
     private OnItemClickListener onItemClickListener;
 
+    /**
+     * Create a new RecyclerView adapter that listens to a Firestore Query.  See {@link
+     * FirestoreRecyclerOptions} for configuration options.
+     *
+     * @param options
+     */
+    public SectionAdapter(@NonNull FirestoreRecyclerOptions<SectionClass> options) {
+        super(options);
+    }
+
     public interface OnItemClickListener {
 
         void onClick(int position);
@@ -50,12 +62,15 @@ class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionViewHold
         this.onItemClickListener = onItemClickListener;
     }
 
-    public SectionAdapter(Context context, List<SectionClass> section) {
+   /* public SectionAdapter(Context context, List<SectionClass> section) {
         this.section = section;
         this.context = context;
 
 
-    }
+    }*/
+   public void deleteItem(int position) {
+       getSnapshots().getSnapshot(position).getReference().delete();
+   }
 
 
     public static class SectionViewHolder extends RecyclerView.ViewHolder {
@@ -86,16 +101,22 @@ class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionViewHold
         return new SectionViewHolder(itemView, onItemClickListener);
     }
 
-    @Override
+  /*  @Override
     public void onBindViewHolder(@NonNull SectionViewHolder holder, int position) {
         holder.section_name.setText(section.get(position).getSection());
 
 
     }
-
-
+*/
     @Override
+    protected void onBindViewHolder(@NonNull SectionViewHolder holder, int position, @NonNull SectionClass model) {
+        holder.section_name.setText(model.getSection());
+
+    }
+
+
+   /* @Override
     public int getItemCount() {
         return section.size();
-    }
+    }*/
 }

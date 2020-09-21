@@ -28,6 +28,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
 import java.util.ArrayList;
@@ -58,9 +59,17 @@ class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.student
     CollectionReference collectionReference;
     StudentItems studentItems_object = new StudentItems();
     String ui="";
+    String lectureName,title,section;
+    List<PerformanceClass> quizitems1= new ArrayList<>();
+    List<PerformanceClass> quizitems2= new ArrayList<>();
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-
+    public void setSection(String section) {
+        this.section = section;
+    }
 
     public static final String TAG = "check";
     SharedPreferences sharedPreferences1, sharedPreferences2, sharedPreferences3;
@@ -131,10 +140,50 @@ class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.student
                 dialog.setContentView(R.layout.student_info_bottomsheet);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 TextView t1 = dialog.findViewById(R.id.days);
-                TextView t2 = dialog.findViewById(R.id.quizes);
-                TextView t3 = dialog.findViewById(R.id.cg);
+                TextView t2 = dialog.findViewById(R.id.grades);
+                TextView t3 = dialog.findViewById(R.id.cg_info);
            //     dialog.create();
                 dialog.show();
+                CollectionReference collectionReference =  firestore.collection("users").document(userID)
+                        .collection("Courses").document(title)
+                        .collection("Sections").document(section)
+                        .collection("Class_Performance").document(holder.roll.getText().toString())
+                        .collection("Backup");
+                collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<PerformanceClass> doc = queryDocumentSnapshots.toObjects(PerformanceClass.class);
+                        quizitems1.addAll(doc);
+                        for(PerformanceClass performanceClass : doc)
+                        {
+                            t3.setText(Double.toString(performanceClass.getCgpa()));
+                           t2.setText(performanceClass.getGrade());
+
+                        }
+
+                    }
+                });
+                CollectionReference collectionReference2 =  firestore.collection("users").document(userID)
+                        .collection("Courses").document(title)
+                        .collection("Sections").document(section)
+                        .collection("Class_Performance");
+                collectionReference2.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                        List<PerformanceClass> doc = queryDocumentSnapshots.toObjects(PerformanceClass.class);
+                        quizitems2.addAll(doc);
+                        for(PerformanceClass performanceClass : doc)
+                        {
+                            t1.setText(Integer.toString(quizitems2.get(position).getCount()));
+
+                        }
+
+                    }
+                });
+
+
+
             }
         });
 

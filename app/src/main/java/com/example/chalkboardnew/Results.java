@@ -17,6 +17,8 @@ public class Results extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
         quiz_marks = findViewById(R.id.quiz_marks_cardview);
+        class_performance = findViewById(R.id.performance);
+        cg = findViewById(R.id.cgpa);
         results_toolbar = findViewById(R.id.toolbar_results);
         setSupportActionBar(results_toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,6 +43,25 @@ public class Results extends AppCompatActivity {
 
             }
         });
+        class_performance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),ClassPerformance.class);
+                intent.putExtra("section",sec);
+                intent.putExtra("title",title);
+                startActivity(intent);
 
+            }
+        });
+        cg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),CGPACalculator.class);
+                intent.putExtra("section",sec);
+                intent.putExtra("title",title);
+                startActivity(intent);
+
+            }
+        });
     }
 }

@@ -115,7 +115,9 @@ public class Update_profile extends AppCompatActivity {
     }
 
     private void update() {
-        if (isNameChanged() || isPassChanged() || isMailChanged()) {
+        if (isNameChanged() && isPassChanged() && isMailChanged() || isNameChanged() && isPassChanged()
+                || isPassChanged() && isMailChanged() || isMailChanged() && isNameChanged()
+                || isNameChanged()|| isPassChanged() || isMailChanged()) {
             Toast.makeText(this, "Your profile has been updated!", Toast.LENGTH_SHORT).show();
         }
     }

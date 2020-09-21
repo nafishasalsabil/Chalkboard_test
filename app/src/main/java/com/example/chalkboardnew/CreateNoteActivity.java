@@ -194,6 +194,7 @@ public class CreateNoteActivity extends AppCompatActivity {
             user.put("date",date_today);
             user.put("mynote",my_note);
             user.put("url",url);
+            user.put("search",note_title);
 
 
             documentReference.set(user);

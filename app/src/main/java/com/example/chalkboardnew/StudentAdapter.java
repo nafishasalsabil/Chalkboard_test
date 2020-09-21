@@ -21,10 +21,13 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,12 +46,13 @@ class StudentAdapter extends BaseAdapter {
 
     Context context;
     private List<StudentItems> studentItems = new ArrayList<>();
-    String status = "";
+    String status = "not_taken";
     private static int p, a, l;
     boolean x = false, y = false, z = false;
     public static final String PRESENT_TEXT = "present";
     public static final String ABS_TEXT = "abs";
     public static final String LATE_TEXT = "late";
+    int i = 0;
     private DocumentReference documentReference;
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
@@ -70,7 +74,7 @@ class StudentAdapter extends BaseAdapter {
 
     private void ResetStatus() {
         for (StudentItems student : studentItems) {
-            student.setStatus("");
+            student.setStatus("not_taken");
         }
     }
 
@@ -194,13 +198,56 @@ class StudentAdapter extends BaseAdapter {
                     radioButtonPresent.setChecked(true);
                     documentReference = firestore.collection("users").document(userID)
                             .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
-                            .collection("Attendance").document(Lecture_s).collection(Integer.toString(studentItems.get(position).getId())).document("Status");
+                            .collection("Attendance").document(Lecture_s).collection("Status").document(Integer.toString(studentItems.get(position).getId()));
                     Map<String, Object> inuser = new HashMap<>();
                     inuser.put("id", studentItems.get(position).getId());
                     inuser.put("name", studentItems.get(position).getName());
                     inuser.put("status", status);
 
                     documentReference.set(inuser);
+                    if(status.equals("present"))
+                    {
+                        CollectionReference collectionReference =firestore.collection("users").document(userID)
+                                .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                                .collection("Class_Performance");
+                        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                            @Override
+                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                List<PerformanceClass> doc = queryDocumentSnapshots.toObjects(PerformanceClass.class);
+                                for(PerformanceClass performanceClass : doc)
+                                {
+                                    i=0;
+                                    if(performanceClass.getId() == studentItems.get(position).getId())
+                                    {
+                                        i = performanceClass.getCount();
+                                        i++;
+                                        System.out.println(i);
+                                        DocumentReference documentReference1 = firestore.collection("users").document(userID)
+                                                .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                                                .collection("Class_Performance").document(Integer.toString(studentItems.get(position).getId()));
+                                        Map<String, Object> inuser1 = new HashMap<>();
+                                        inuser1.put("count", i);
+                                        Log.d("checkC",i+"");
+                                        documentReference1.update(inuser1);
+
+                                    }
+
+
+                                }
+                            }
+                        });
+                     /*   DocumentReference documentReference1 = firestore.collection("users").document(userID)
+                                .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                                .collection("Class_Performance").document(Integer.toString(studentItems.get(position).getId()));
+                        Map<String, Object> inuser1 = new HashMap<>();
+                        inuser1.put("count", i);
+                        Log.d("checkC",i+"");
+                        documentReference1.update(inuser1);
+
+*/
+
+
+                    }
 
                 } else if (checkedItem == R.id.radioButton_abs) {
                     status = ABS_TEXT;
@@ -220,7 +267,7 @@ class StudentAdapter extends BaseAdapter {
 
                     documentReference = firestore.collection("users").document(userID)
                             .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
-                            .collection("Attendance").document(Lecture_s).collection(Integer.toString(studentItems.get(position).getId())).document("Status");
+                            .collection("Attendance").document(Lecture_s).collection("Status").document(Integer.toString(studentItems.get(position).getId()));
                     Map<String, Object> inuser = new HashMap<>();
                     inuser.put("id", studentItems.get(position).getId());
                     inuser.put("name", studentItems.get(position).getName());
@@ -242,15 +289,16 @@ class StudentAdapter extends BaseAdapter {
                     studentItems.get(position).setStatus(status);
                     statusOfLate.put(position, true);
                     radioButtonLate.setChecked(true);
-                    documentReference = firestore.collection("users").document(userID)
+                     documentReference = firestore.collection("users").document(userID)
                             .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
-                            .collection("Attendance").document(Lecture_s).collection(Integer.toString(studentItems.get(position).getId())).document("Status");
+                            .collection("Attendance").document(Lecture_s).collection("Status").document(Integer.toString(studentItems.get(position).getId()));
                     Map<String, Object> inuser = new HashMap<>();
                     inuser.put("id", studentItems.get(position).getId());
                     inuser.put("name", studentItems.get(position).getName());
                     inuser.put("status", status);
 
-                    documentReference.set(inuser);
+
+                    documentReference.update(inuser);
                 }
 //                notifyDataSetChanged();
             }

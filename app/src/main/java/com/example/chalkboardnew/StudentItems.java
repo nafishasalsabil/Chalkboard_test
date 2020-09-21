@@ -6,11 +6,23 @@ public class StudentItems {
     String status;
     String lecture_name;
     String lecture_date;
+    String quiz_marks;
 
     boolean attendance;
     int checkedId ;
 
     public StudentItems() {
+    }
+
+    public StudentItems(int id, String name, String status, String lecture_name, String lecture_date, String quiz_marks, boolean attendance, int checkedId) {
+        this.id = id;
+        this.name = name;
+        this.status = status;
+        this.lecture_name = lecture_name;
+        this.lecture_date = lecture_date;
+        this.quiz_marks = quiz_marks;
+        this.attendance = attendance;
+        this.checkedId = checkedId;
     }
 
     public StudentItems(int id, String name, String status, String lecture_name, String lecture_date) {
@@ -69,11 +81,16 @@ public class StudentItems {
         this.lecture_date = lecture_date;
     }
 
+    public String getQuiz_marks() {
+        return quiz_marks;
+    }
+
+    public void setQuiz_marks(String quiz_marks) {
+        this.quiz_marks = quiz_marks;
+    }
+
     @Override
     public String toString() {
-        return "StudentItems{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return String.valueOf(id);
     }
 }

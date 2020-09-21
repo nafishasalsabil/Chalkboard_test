@@ -7,12 +7,21 @@
     tools:context=".MyNotes"
     android:padding="8dp"
   >
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:elevation="0dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+
+        />
 
     <TextView
         android:id="@+id/textMyNotes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="2sp"
         android:layout_marginEnd="12dp"
         android:fontFamily="@font/exoregular"
         android:includeFontPadding="false"
@@ -20,48 +29,18 @@
         android:text="My Notes"
         android:textColor="@android:color/black"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/LayoutSearch"
+        android:layout_below="@+id/toolbar_notes" />
+    <EditText
+        android:id="@+id/search_notes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textMyNotes"
-        android:background="@drawable/background_search"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:padding="8dp">
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_search"
-            android:padding="5dp"
+        android:layout_margin="5dp"
+        android:hint="Search"
+        android:padding="8dp"
+        android:layout_below="@+id/toolbar_notes"
 
-            />
-
-        <EditText
-            android:id="@+id/inputSearch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@android:color/black"
-            android:layout_marginStart="13dp"
-            android:background="@null"
-            android:fontFamily="@font/exoregular"
-            android:hint="Search notes"
-            android:imeOptions="actionDone"
-            android:importantForAutofill="no"
-            android:includeFontPadding="false"
-            android:inputType="text"
-            android:textColor="@android:color/black"
-            android:textColorHint="@color/c5"
-            android:textSize="13dp"
-
-            />
-
-
-    </LinearLayout>
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:background="@drawable/roundededittextmessage"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notesRecyclerView"
@@ -71,8 +50,8 @@
         android:layout_marginEnd="2dp"
         android:clipToPadding="false"
         android:visibility="visible"
-        android:layout_below="@+id/LayoutSearch"
-        app:layout_constraintTop_toBottomOf="@+id/LayoutSearch" />
+        android:layout_below="@+id/search_notes"
+         />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

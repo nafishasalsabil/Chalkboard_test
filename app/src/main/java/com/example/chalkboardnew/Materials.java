@@ -70,7 +70,10 @@ public class Materials extends AppCompatActivity {
         tutorials_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), Tutorials.class));
+                Intent intent1 = new Intent(getApplicationContext(),Tutorials.class);
+                intent1.putExtra("section",sec);
+                intent1.putExtra("title",title);
+                startActivity(intent1);
 
             }
         });

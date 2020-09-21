@@ -27,6 +27,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginStart="10dp"
         android:orientation="horizontal"
       >
         <TextView
@@ -59,6 +60,8 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
+
         >
         <TextView
             android:layout_width="wrap_content"
@@ -66,18 +69,18 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:text="Quizes attended : "
+            android:text="Grade for this course : "
             android:padding="5dp"
             android:fontFamily="@font/exoregular"
             android:layout_marginTop="10dp"
             />
         <TextView
-            android:id="@+id/quizes"
+            android:id="@+id/grades"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:backgroundTint="#9BCFC5"
-            android:text="numbers"
+            android:text="garde"
             android:fontFamily="@font/exoregular"
             android:textSize="15sp"
             android:textColor="@android:color/white"
@@ -89,6 +92,7 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:layout_marginTop="15dp"
+        android:layout_marginStart="10dp"
 
         >
         <TextView
@@ -103,7 +107,7 @@
             android:layout_marginTop="10dp"
             />
         <TextView
-            android:id="@+id/cg"
+            android:id="@+id/cg_info"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

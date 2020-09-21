@@ -74,10 +74,13 @@ class QuizMarksAdapter extends RecyclerView.Adapter<QuizMarksAdapter.QuizMarksVi
     public static class QuizMarksViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
         TextView quiz_title;
+        TextView quiz_marks;
 
         public QuizMarksViewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
             quiz_title = itemView.findViewById(R.id.quiztitle);
+            quiz_marks = itemView.findViewById(R.id.quiz_marks_total);
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -85,6 +88,7 @@ class QuizMarksAdapter extends RecyclerView.Adapter<QuizMarksAdapter.QuizMarksVi
                     Intent intent = new Intent(v.getContext(),QuizMarksRecord.class);
                     intent.putExtra("Title",title);
                     intent.putExtra("Section",sec);
+                    intent.putExtra("quiz",quiz_title.getText());
 
                     // System.out.println(classname.getText());
                    v.getContext().startActivity(intent);
@@ -104,6 +108,8 @@ class QuizMarksAdapter extends RecyclerView.Adapter<QuizMarksAdapter.QuizMarksVi
     @Override
     public void onBindViewHolder(@NonNull QuizMarksViewHolder holder, int position) {
         holder.quiz_title.setText(quizitems.get(position).getQuiz());
+        holder.quiz_marks.setText(Integer.toString(quizitems.get(position).getQuiz_total_marks()));
+
 
     }
 

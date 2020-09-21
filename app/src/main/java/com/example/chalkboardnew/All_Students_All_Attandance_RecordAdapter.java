@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ class All_Students_All_Attandance_RecordAdapter extends RecyclerView.Adapter<All
     String userID = firebaseAuth.getCurrentUser().getUid();
     DocumentReference documentReference;
     String lectureName,title,section;
+    int i=0;
 
     public void setLectureName(String lectureName) {
         this.lectureName = lectureName;
@@ -121,16 +123,26 @@ class All_Students_All_Attandance_RecordAdapter extends RecyclerView.Adapter<All
         holder.setIsRecyclable(false);
         holder.roll.setText(Integer.toString(studentItemsrecord.get(position).getId()));
         holder.name.setText(studentItemsrecord.get(position).getName());
+   /*     DocumentReference documentReference3 = firestore.collection("users").document(userID)
+                .collection("Courses").document(clicked_courseTitle).collection("Sections").document(clicked_course_section)
+                .collection("Attendance").document(Lecture_s).collection("Status").document(Integer.toString(studentItems1.getId()));
+*/
         documentReference = firestore.collection("users").document(userID)
                 .collection("Courses").document(title).collection("Sections")
                 .document(section)
-                .collection("Attendance").document(lectureName).collection(Integer.toString(studentItemsrecord.get(position).getId())).document("Status");
+                .collection("Attendance").document(lectureName).collection("Status").document(Integer.toString(studentItemsrecord.get(position).getId()));
             documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                 @Override
                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                     StatusClass statusClass = documentSnapshot.toObject(StatusClass.class);
 
                     holder.status.setText(statusClass.getStatus());
+                    Log.d("checkS",statusClass.getStatus());
+                    if(statusClass.getStatus().equals("present"))
+                    {
+                        i++;
+                        Log.d("checkStatus",i+"");
+                    }
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
