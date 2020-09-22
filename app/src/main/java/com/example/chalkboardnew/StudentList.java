@@ -116,6 +116,11 @@ Button done;
         toolbar_list.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent2 = new Intent(getApplicationContext(),InsideClassActivity.class);
+                intent2.putExtra("title", clicked_courseTitle);
+                intent2.putExtra("section", clicked_course_section);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent2);
                 finish();
             }
         });

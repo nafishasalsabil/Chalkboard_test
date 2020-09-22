@@ -274,7 +274,8 @@ public class Attendance_activity extends AppCompatActivity {
                 Intent intent1 = new Intent(getApplicationContext(), StudentList.class);
                intent1.putExtra("title",clicked_courseTitle);
                intent1.putExtra("section",clicked_course_section);
-               startActivity(intent1);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent1);
 
             }
         });

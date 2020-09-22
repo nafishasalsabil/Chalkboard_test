@@ -75,7 +75,7 @@ public class QuizMarksRecordHT extends AppCompatActivity {
                 .collection("Courses").document(title).collection("Batches")
                 .document(section)
                 .collection("Quizes").document(quiz).collection("Students");
-        collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        collectionReference.orderBy("id").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
