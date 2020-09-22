@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -43,6 +44,18 @@ public class HomeFragment_HomeTutor extends Fragment {
     RecyclerView home_recyleview;
     String class_name = "";
     HomeHomeTutorAdapter homeAdapter;
+    TextView expected,recieved;
+    List<CourseInfoHomeTutorClass> list = new ArrayList<>();
+    List<BatchClass> list2 = new ArrayList<>();
+    List<IncomeClass> list3 = new ArrayList<>();
+    int sum = 0,money=0;
+    int payment_counter = 0;
+    int paid_sum = 0;
+    int remaining_sum = 0;
+    int remaining_student = 0;
+    TextView remaining_money,total,paid,unpaid_student;
+
+
 
     @Nullable
     @Override
@@ -54,6 +67,12 @@ public class HomeFragment_HomeTutor extends Fragment {
         home_recyleview.setLayoutManager(layoutManager);
         dayname = view.findViewById(R.id.day_name_ht);
         datetoday = view.findViewById(R.id.date_today_ht);
+        expected = view.findViewById(R.id.expected_income_ht);
+        recieved = view.findViewById(R.id.recieved_money);
+        remaining_money =view.findViewById(R.id.remaining_money);
+        total = view.findViewById(R.id.total_students);
+        paid = view.findViewById(R.id.paid_stu);
+        unpaid_student = view.findViewById(R.id.rem_stu);
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
         Date d = new Date();
         String dayOfTheWeek = sdf.format(d);
@@ -96,6 +115,89 @@ public class HomeFragment_HomeTutor extends Fragment {
 
                 home_recyleview.setAdapter(homeAdapter);
                 homeAdapter.notifyDataSetChanged();
+
+            }
+        });
+        CollectionReference collectionReference1 = firestore.collection("users").document(userID)
+                .collection("Courses");
+        collectionReference1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                list.clear();
+                List<CourseInfoHomeTutorClass> doc = queryDocumentSnapshots.toObjects(CourseInfoHomeTutorClass.class);
+                list.addAll(doc);
+                for(int i=0;i<list.size();i++)
+                {
+                    System.out.println(list.get(i).getCourseName());
+                   // System.out.println(list.get(i).getPaymentPerStudent());
+                    CollectionReference collectionReference2 = collectionReference1
+                            .document(list.get(i).getCourseName()).collection("Batches");
+                    collectionReference2.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        @Override
+                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                            list2.clear();
+                            List<BatchClass> doc2 = queryDocumentSnapshots.toObjects(BatchClass.class);
+                            list2.addAll(doc2);
+                            for(int i=0;i<list2.size();i++)
+                            {
+                                money = list2.get(i).getPaymentPerStudent();
+
+                                System.out.println(list2.get(i).getBatchName());
+                                System.out.println(list2.get(i).getPaymentPerStudent());
+                                CollectionReference collectionReference3 = collectionReference2
+                                        .document(list2.get(i).getBatchName()).collection("Monthly_Payments");
+                                collectionReference3.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                    @Override
+                                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                        list3.clear();
+                                        List<IncomeClass> doc3 = queryDocumentSnapshots.toObjects(IncomeClass.class);
+                                        list3.addAll(doc3);
+                                        for(int i=0;i<list3.size();i++)
+                                        {
+                                            System.out.println(list3.get(i).getPayment());
+                                            System.out.println(list3.get(i).getId());
+                                            if(list3.get(i).getPayment().equals("paid"))
+                                            {
+                                                payment_counter++;
+                                                paid_sum = paid_sum + money;
+                                                Log.d("checkPaid",paid_sum+"");
+                                                paid.setText(Integer.toString(payment_counter));
+                                            }
+                                            else
+                                            {
+                                                remaining_student++;
+                                                Log.d("checkStu",remaining_student+"");
+                                                unpaid_student.setText(Integer.toString(remaining_student));
+
+                                            }
+
+
+                                        }
+                                        Log.d("checkPaidStudents",payment_counter+"");
+
+
+                                        sum = sum +money * list3.size();
+                                        System.out.println(sum);
+                                        expected.setText(Integer.toString(sum));
+                                        Log.d("checkSum",sum+"");
+                                        total.setText(Integer.toString(remaining_student+payment_counter));
+
+                                        remaining_sum = sum - paid_sum;
+                                        Log.d("checkRem",remaining_sum+"");
+                                        recieved.setText(Integer.toString(paid_sum));
+                                        remaining_money.setText(Integer.toString(remaining_sum));
+
+
+                                        //  remaining_student = list3.size()-payment_counter;
+
+                                    }
+                                });
+
+                            }
+
+                        }
+                    });
+                }
 
             }
         });
