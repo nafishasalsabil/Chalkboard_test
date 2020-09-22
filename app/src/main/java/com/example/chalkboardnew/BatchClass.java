@@ -1,12 +1,13 @@
 package com.example.chalkboardnew;
 
 public class BatchClass {
-    String batchName,numberOfDays,batchDays,batchTime,paymentPerStudent;
+    String batchName,numberOfDays,batchDays,batchTime;
+    int paymentPerStudent;
 
     public BatchClass() {
     }
 
-    public BatchClass(String batchName, String numberOfDays, String batchDays, String batchTime, String paymentPerStudent) {
+    public BatchClass(String batchName, String numberOfDays, String batchDays, String batchTime, int paymentPerStudent) {
         this.batchName = batchName;
         this.numberOfDays = numberOfDays;
         this.batchDays = batchDays;
@@ -46,11 +47,11 @@ public class BatchClass {
         this.batchTime = batchTime;
     }
 
-    public String getPaymentPerStudent() {
+    public int getPaymentPerStudent() {
         return paymentPerStudent;
     }
 
-    public void setPaymentPerStudent(String paymentPerStudent) {
+    public void setPaymentPerStudent(int paymentPerStudent) {
         this.paymentPerStudent = paymentPerStudent;
     }
 }

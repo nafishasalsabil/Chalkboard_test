@@ -190,7 +190,7 @@ public class Batch_inside_courses_home_tutor extends AppCompatActivity {
                 String b_no_of_days = no_of_days.getText().toString();
                 String b_days = batch_days.getText().toString();
                 String b_time = batch_time.getText().toString();
-                String b_payment = payment_per_student.getText().toString();
+                int b_payment = Integer.parseInt(payment_per_student.getText().toString());
 
                 System.out.println(b_name);
 
@@ -211,24 +211,28 @@ public class Batch_inside_courses_home_tutor extends AppCompatActivity {
                 {
                     batch_time.setError("required");
                     return;
-                }   if (TextUtils.isEmpty(b_payment))
+                }   if (TextUtils.isEmpty(payment_per_student.getText().toString()))
                 {
                     payment_per_student.setError("required");
                     return;
                 }
-                System.out.println(title);
-                DocumentReference documentReference = firestore.collection("users").document(userID)
-                        .collection("Courses").document(title).collection("Batches").document(b_name);
+                else
+                {
+                    System.out.println(title);
+                    DocumentReference documentReference = firestore.collection("users").document(userID)
+                            .collection("Courses").document(title).collection("Batches").document(b_name);
 
-                BatchClass batchClass = new BatchClass(b_name,b_no_of_days,b_days,b_time,b_payment);
-                documentReference.set(batchClass).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(getApplicationContext(),"Batch is added!",Toast.LENGTH_SHORT);
-                    }
-                });
+                    BatchClass batchClass = new BatchClass(b_name,b_no_of_days,b_days,b_time,b_payment);
+                    documentReference.set(batchClass).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(),"Batch is added!",Toast.LENGTH_SHORT);
+                        }
+                    });
 
-                dialog.dismiss();
+                    dialog.dismiss();
+                }
+
 
             }
         });
