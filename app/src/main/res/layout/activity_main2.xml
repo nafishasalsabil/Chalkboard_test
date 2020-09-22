@@ -113,42 +113,9 @@
         android:indeterminateTint="@android:color/white"
         android:visibility="gone" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="147dp"
-        android:layout_marginBottom="117dp"
-        android:fontFamily="@font/moonbold"
-        android:text="Sign in with "
-        android:textColor="@android:color/white"
-        android:textSize="12sp" />
 
-    <Button
-        android:id="@+id/google"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="135dp"
-        android:layout_marginBottom="120dp"
-        android:clickable="true"
-        android:background="@drawable/ic_google"
-         />
 
-    <TextView
-        android:id="@+id/or"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="198dp"
-        android:layout_marginBottom="94dp"
-        android:fontFamily="@font/exoregular"
-        android:text="or"
-        android:textSize="12sp"
-        android:textColor="#F7F7F3" />
+
 
     <TextView
         android:id="@+id/singup"

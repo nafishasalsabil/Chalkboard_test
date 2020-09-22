@@ -107,13 +107,13 @@ SharedPreferences sharedPreferences;
 
   //      firestore = FirebaseFirestore.getInstance();
 
-        google = findViewById(R.id.google);
-        google.setOnClickListener(new View.OnClickListener() {
-            @Override
+       /*google = findViewById(R.id.google);
+/       google.setOnClickListener(new View.OnClickListener() {
+           @Override
             public void onClick(View v) {
                 signIn();
             }
-        });
+        });*/
         signin.setOnClickListener(new View.OnClickListener() {
 
             @Override
