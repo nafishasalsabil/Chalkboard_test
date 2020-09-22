@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -41,6 +42,9 @@ class StudentInfoHomeTutorAdapter extends RecyclerView.Adapter<StudentInfoHomeTu
     String lectureName,title,section;
     List<PerformanceClass> quizitems1= new ArrayList<>();
     List<PerformanceClass> quizitems2= new ArrayList<>();
+    List<PercentageClass> quizitems3= new ArrayList<>();
+    List<IncomeClass> list3 = new ArrayList<>();
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -123,6 +127,53 @@ class StudentInfoHomeTutorAdapter extends RecyclerView.Adapter<StudentInfoHomeTu
            //     TextView t3 = dialog.findViewById(R.id.cg_info);
            //     dialog.create();
                 dialog.show();
+             DocumentReference  studentcollection = firestore.collection("users").document(userID)
+                        .collection("Courses").document(title).collection("Batches")
+                        .document(section)
+                        .collection("Class_Performance")
+                     .document(Integer.toString(studentItems1.get(position).getId())).collection("Marks").document("Coverted_to_100");
+         studentcollection.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+             @Override
+             public void onSuccess(DocumentSnapshot documentSnapshot) {
+                PercentageClass percentageClass = documentSnapshot.toObject(PercentageClass.class);
+                quizitems3.add(percentageClass);
+                 System.out.println(percentageClass.getPercentage());
+                 t2.setText(Double.toString(percentageClass.getPercentage()));
+             }
+         });
+         CollectionReference collectionReference =  firestore.collection("users").document(userID)
+                 .collection("Courses").document(title).collection("Batches")
+                 .document(section)
+                 .collection("Monthly_Payments");
+         collectionReference.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+             @Override
+             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                 List<IncomeClass> doc3 = queryDocumentSnapshots.toObjects(IncomeClass.class);
+                 list3.addAll(doc3);
+                 for(int i=0;i<list3.size();i++)
+                 {
+                     System.out.println(list3.get(i).getPayment());
+                     t1.setText(list3.get(i).getPayment());
+
+
+                 }
+
+             }
+         });
+
+            /* studentcollection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                 @Override
+                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    List<PercentageClass> doc = queryDocumentSnapshots.toObjects(PercentageClass.class);
+                    quizitems3.addAll(doc);
+
+                    t1.setText(Double.toString(quizitems3.get(position).getPercentage()));
+                     System.out.println(Double.toString(quizitems3.get(position).getPercentage()));
+
+                 }
+             });
+*/
+
               /*  CollectionReference collectionReference =  firestore.collection("users").document(userID)
                         .collection("Courses").document(title)
                         .collection("Sections").document(section)
