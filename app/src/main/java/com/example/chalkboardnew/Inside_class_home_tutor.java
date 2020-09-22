@@ -89,6 +89,7 @@ public class Inside_class_home_tutor extends AppCompatActivity {
                 intent.putExtra("section",section);
                 intent.putExtra("title",title);
                 startActivity(intent);
+                finish();
             }
         });
         materials.setOnClickListener(new View.OnClickListener() {
