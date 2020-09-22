@@ -2,6 +2,7 @@ package com.example.chalkboardnew;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,9 +48,10 @@ public class MyNotes extends AppCompatActivity {
     String title = "";
     String sec = "";
     List<NotesClass> notesClassList = new ArrayList();
-
+    Toolbar t;
     NotesAdapter notesAdapter;
     EditText search_notes;
+    Toolbar toolbar1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,23 @@ public class MyNotes extends AppCompatActivity {
          title  =intent.getStringExtra("title");
          sec = intent.getStringExtra("section");
         search_notes =findViewById(R.id.search_notes);
+        toolbar1 = findViewById(R.id.toolbar_notes);
+        setSupportActionBar(toolbar1);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar1.setNavigationIcon(R.drawable.ic_back);
+        getSupportActionBar().setElevation(0);
+        toolbar1.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getApplicationContext(), Materials.class);
+                intent1.putExtra("title",title);
+                intent1.putExtra("section",sec);
+                intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent1);
+
+                finish();
+            }
+        });
         search_notes.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

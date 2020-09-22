@@ -94,7 +94,7 @@ class NotesAdapter extends FirestoreRecyclerAdapter<NotesClass,NotesAdapter.Note
             my_note = itemView.findViewById(R.id.mynotes);
             url = itemView.findViewById(R.id.url_tv);
             date = itemView.findViewById(R.id.notes_date);
-            itemView.setOnClickListener(new View.OnClickListener() {
+           /* itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    onItemClickListener.onClick(ClassViewHolder.this.getAdapterPosition());
@@ -107,7 +107,7 @@ class NotesAdapter extends FirestoreRecyclerAdapter<NotesClass,NotesAdapter.Note
                     v.getContext().startActivity(intent);
                 }
             });
-
+*/
         }
     }
 
