@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -27,7 +26,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -36,17 +34,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class QuizMarks extends AppCompatActivity {
+public class MarksHomeTutor extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
-   public static String sec = "";
-   public static String title_course = "";
+    public static String sec = "";
+    public static String title_course = "";
     FloatingActionButton floatingActionButton_quiz;
     QuizNameClass quizNameClass = new QuizNameClass();
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
     String userID = firebaseAuth.getCurrentUser().getUid();
     RecyclerView quiz_recylerview ;
-    private QuizMarksAdapter quizMarksAdapter;
+    private QuizMarksHTAdapter quizMarksAdapter;
     private RecyclerView.LayoutManager layoutManager;
     CollectionReference quizcolllection;
     List<QuizNameClass> quizItems = new ArrayList<>();
@@ -57,13 +55,13 @@ public class QuizMarks extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_quiz_marks);
+        setContentView(R.layout.activity_marks_home_tutor);
         Intent intent = getIntent();
         sec =  intent.getStringExtra("section");
         title_course =  intent.getStringExtra("title");
-        floatingActionButton_quiz = findViewById(R.id.add_quiz_fab);
+        floatingActionButton_quiz = findViewById(R.id.add_quiz_fab_ht);
         t1 = findViewById(R.id.nqt1);
-        toolbar_quiz = findViewById(R.id.toolbar_quiz);
+        toolbar_quiz = findViewById(R.id.toolbar_quiz_ht);
         setSupportActionBar(toolbar_quiz);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar_quiz.setNavigationIcon(R.drawable.ic_back);
@@ -80,12 +78,12 @@ public class QuizMarks extends AppCompatActivity {
         quiz_recylerview.setLayoutManager(layoutManager);
         quizcolllection = firestore.collection("users").document(userID)
                 .collection("Courses").document(title_course)
-                .collection("Sections").document(sec).collection("Quizes");
+                .collection("Batches").document(sec).collection("Quizes");
         quizcolllection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 List<QuizNameClass> documentData = queryDocumentSnapshots.toObjects(QuizNameClass.class);
-                quizMarksAdapter = new QuizMarksAdapter(getApplicationContext(), quizItems);
+                quizMarksAdapter = new QuizMarksHTAdapter(getApplicationContext(), quizItems);
                 quiz_recylerview.setAdapter(quizMarksAdapter);
                 quizItems.addAll(documentData);
                 quizMarksAdapter.setSec(sec);
@@ -105,28 +103,28 @@ public class QuizMarks extends AppCompatActivity {
         floatingActionButton_quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alerDialog2 = new AlertDialog.Builder(QuizMarks.this);
-                View view = LayoutInflater.from(QuizMarks.this).inflate(R.layout.add_quiz_dialog_box, null);
+                AlertDialog.Builder alerDialog2 = new AlertDialog.Builder(MarksHomeTutor.this);
+                View view = LayoutInflater.from(MarksHomeTutor.this).inflate(R.layout.add_quiz_dialog_box_ht, null);
                 alerDialog2.setView(view);
                 AlertDialog dialog = alerDialog2.create();
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
                 dialog.show();
 
-                Button add_quiz_done = view.findViewById(R.id.done_quiz_add);
-                EditText quiz_name =view. findViewById(R.id.quiz_name_edittext);
-                TextView quiz_date = view.findViewById(R.id.quiz_date_textview);
-                EditText total_marks =view. findViewById(R.id.total_marks);
+                Button add_quiz_done = view.findViewById(R.id.done_quiz_add_ht);
+                EditText quiz_name =view. findViewById(R.id.quiz_name_edittext_ht);
+                TextView quiz_date = view.findViewById(R.id.quiz_date_textview_ht);
+                EditText total_marks =view. findViewById(R.id.total_marks_ht);
 
                 quiz_date.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DatePicker datePicker = new DatePicker(QuizMarks.this);
+                        DatePicker datePicker = new DatePicker(MarksHomeTutor.this);
                         int day = datePicker.getDayOfMonth();
                         int month = (datePicker.getMonth()) + 1;
                         int year = datePicker.getYear();
 
-                        datePickerDialog = new DatePickerDialog(QuizMarks.this, new DatePickerDialog.OnDateSetListener() {
+                        datePickerDialog = new DatePickerDialog(MarksHomeTutor.this, new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                                 String date_date = dayOfMonth + "/" + (month + 1) + "/" + year;
@@ -146,7 +144,7 @@ public class QuizMarks extends AppCompatActivity {
                     public void onClick(View v) {
                         String q_n = quiz_name.getText().toString();
                         String q_d = quizNameClass.getQuiz_date();
-                       int q = Integer.parseInt(total_marks.getText().toString());
+                        int q = Integer.parseInt(total_marks.getText().toString());
                         if (TextUtils.isEmpty(q_n)) {
                             quiz_name.setError("Quiz name is required");
                             return;
@@ -161,7 +159,7 @@ public class QuizMarks extends AppCompatActivity {
                         }
                         DocumentReference documentReference = firestore.collection("users").document(userID)
                                 .collection("Courses").document(title_course)
-                                .collection("Sections").document(sec).collection("Quizes").document(q_n);
+                                .collection("Batches").document(sec).collection("Quizes").document(q_n);
 
                         Map<String, Object> user = new HashMap<>();
                         user.put("quiz", q_n);
@@ -169,7 +167,7 @@ public class QuizMarks extends AppCompatActivity {
                         user.put("quiz_total_marks",q);
                         documentReference.set(user);
                         QuizNameClass quizNameClass = new QuizNameClass(q_n,q_d,q);
-                        quizMarksAdapter = new QuizMarksAdapter(getApplicationContext(), quizItems);
+                        quizMarksAdapter = new QuizMarksHTAdapter(getApplicationContext(), quizItems);
                         quiz_recylerview.setAdapter(quizMarksAdapter);
                         quizItems.add(quizNameClass);
                         quizMarksAdapter.notifyDataSetChanged();
@@ -178,13 +176,13 @@ public class QuizMarks extends AppCompatActivity {
 
 
                         dialog.dismiss();
-                        CollectionReference    studentcollection = firestore.collection("users").document(userID)
-                                .collection("Courses").document(title_course).collection("Sections")
+                        CollectionReference studentcollection = firestore.collection("users").document(userID)
+                                .collection("Courses").document(title_course).collection("Batches")
                                 .document(sec)
                                 .collection("Students");
 
 
-                          studentcollection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                        studentcollection.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                             @Override
                             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                 for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots)
@@ -194,7 +192,7 @@ public class QuizMarks extends AppCompatActivity {
                                     studentItems1.add(items);
                                     System.out.println(studentItems1);
                                     DocumentReference documentReference =  firestore.collection("users").document(userID)
-                                            .collection("Courses").document(title_course).collection("Sections")
+                                            .collection("Courses").document(title_course).collection("Batches")
                                             .document(sec)
                                             .collection("Quizes").document(q_n).collection("Students").document(Integer.toString(items.getId()));
                                     System.out.println(items.getId());
@@ -209,7 +207,7 @@ public class QuizMarks extends AppCompatActivity {
                                         documentReference.set(user);
 
                                         DocumentReference documentReference1 = firestore.collection("users").document(userID)
-                                                .collection("Courses").document(title_course).collection("Sections")
+                                                .collection("Courses").document(title_course).collection("Batches")
                                                 .document(sec)
                                                 .collection("Class_Performance")
                                                 .document(Integer.toString(items.getId()))
@@ -238,5 +236,6 @@ public class QuizMarks extends AppCompatActivity {
 
             }
         });
+
     }
 }

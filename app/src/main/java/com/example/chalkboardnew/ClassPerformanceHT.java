@@ -15,11 +15,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firebase.firestore.SetOptions;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -27,8 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ClassPerformance extends AppCompatActivity {
-
+public class ClassPerformanceHT extends AppCompatActivity {
     FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -36,7 +33,7 @@ public class ClassPerformance extends AppCompatActivity {
     String clicked_courseTitle = "";
     String clicked_course_section = "";
     private RecyclerView recyclerView;
-    private ClassPerformanceAdapter classPerformanceAdapter;
+    private ClassPerformanceHTAdapter classPerformanceAdapter;
     private RecyclerView.LayoutManager layoutManager;
     List<PerformanceClass> performanceClassList = new ArrayList<>();
     List<QuizNameClass> performanceClassList1 = new ArrayList<>();
@@ -45,46 +42,25 @@ public class ClassPerformance extends AppCompatActivity {
     int j=0;
     Toolbar toolbar_cp;
     List<QuizNameClass> quizNameClassList = new ArrayList<>();
-int i=0;
+    int i=0;
     List<PerformanceClass> list = new ArrayList<>();
     List<PerformanceClass> list2 = new ArrayList<>();
     List<PerformanceClass> list3 = new ArrayList<>();
-double attendance =0;
+    double attendance =0;
     double d=0;
     int res = 0;
     int listSize = 0;
     CollectionReference collectionReference1;
 
-   /* @Override
-    protected void onStart() {
-        super.onStart();
-        CollectionReference collectionReference1 = firestore.collection("users").document(userID)
-                .collection("Courses").document(clicked_courseTitle)
-                .collection("Sections").document(clicked_course_section).collection("Attendance");
-        collectionReference1.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                student.clear();
-                List<StudentItems> documentData = queryDocumentSnapshots.toObjects(StudentItems.class);
-                student.addAll(documentData);
-                Log.d("checkListSize",student.size()+"");
-                listSize = student.size();
-                classPerformanceAdapter = new ClassPerformanceAdapter(getApplicationContext(), performanceClassList);
-                classPerformanceAdapter.setListSize(student.size());
-                classPerformanceAdapter.notifyDataSetChanged();
-            }
-        });
-    }
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_class_performance);
-        recyclerView = findViewById(R.id.class_performance_recycler_view);
+        setContentView(R.layout.activity_class_performance_h_t);
+        recyclerView = findViewById(R.id.class_performance_recycler_view_ht);
         Intent intent = getIntent();
         clicked_courseTitle = intent.getStringExtra("title");
         clicked_course_section = intent.getStringExtra("section");
-        toolbar_cp = findViewById(R.id.toolbar_cp);
+        toolbar_cp = findViewById(R.id.toolbar_cp_ht);
         setSupportActionBar(toolbar_cp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar_cp.setNavigationIcon(R.drawable.ic_back);
@@ -101,26 +77,26 @@ double attendance =0;
         recyclerView.setLayoutManager(layoutManager);
         CollectionReference collectionReference = firestore.collection("users").document(userID)
                 .collection("Courses").document(clicked_courseTitle)
-                .collection("Sections").document(clicked_course_section)
+                .collection("Batches").document(clicked_course_section)
                 .collection("Class_Performance");
         collectionReference.orderBy("id", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-             //   list.clear();
+                //   list.clear();
                 List<PerformanceClass> documentData = queryDocumentSnapshots.toObjects(PerformanceClass.class);
-                classPerformanceAdapter = new ClassPerformanceAdapter(getApplicationContext(), performanceClassList);
+                classPerformanceAdapter = new ClassPerformanceHTAdapter(getApplicationContext(), performanceClassList);
                 recyclerView.setAdapter(classPerformanceAdapter);
                 performanceClassList.addAll(documentData);
                 classPerformanceAdapter.setTitle(clicked_courseTitle);
                 classPerformanceAdapter.setSection(clicked_course_section);
-             //   classPerformanceAdapter.setListSize(student.size());
+                //   classPerformanceAdapter.setListSize(student.size());
                 classPerformanceAdapter.notifyDataSetChanged();
 
             }
         });
         collectionReference1 = firestore.collection("users").document(userID)
                 .collection("Courses").document(clicked_courseTitle)
-                .collection("Sections").document(clicked_course_section)
+                .collection("Batches").document(clicked_course_section)
                 .collection("Class_Performance");
         collectionReference1.orderBy("id").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -130,7 +106,7 @@ double attendance =0;
                 list.addAll(documentData);
                 for(int i=0;i<list.size();i++)
                 {
-                 //   System.out.println(list.get(i).getId());
+                    //   System.out.println(list.get(i).getId());
                     CollectionReference collectionReference2 = collectionReference1
                             .document(Integer.toString(list.get(i).getId())).collection("quizes");
 
@@ -152,13 +128,22 @@ double attendance =0;
 //                                System.out.println(list2);
 
                                 System.out.println("SIZE " + list2.size());
+                                Log.d("check2",list2.size()+"");
+                                Log.d("check3",list3.size()+"");
+
+
 
                                 // g = 0;
                                 double a =(double) performanceClass.getTotal();
+                                Log.d("checkA",a+"");
                                 double e =(double) performanceClass.getMarks();
+                                Log.d("checkE",e+"");
+
                                 if (a > 0 )
                                 {
-                                    g = g +((double) (e * 20) / a);
+                                    g = g +( (double) (e /a) * 100);
+                                    Log.d("checkG",g+"");
+
                                     System.out.println(g);
                                 }
                                 if (list2.size() == list3.size()) {
@@ -168,12 +153,14 @@ double attendance =0;
                                     g = Double.valueOf(df.format(g));
                                     DocumentReference documentReference = collectionReference1
                                             .document(Integer.toString(performanceClass.getId()))
-                                            .collection("Backup").document("Coverted_to_20");
+                                            .collection("Marks").document("Coverted_to_100");
                                     Map<String, Object> user1 = new HashMap<>();
-                                    user1.put("converted_quiz", g);
+                                    user1.put("percentage", g);
                                     documentReference.set(user1);
 
                                     System.out.println(g);
+                                    Log.d("checkG",g+"");
+
                                     list2.clear();
                                 }
                                   /*  g = g / 3.00;
@@ -307,7 +294,7 @@ double attendance =0;
                                         System.out.println(performanceClass.getId());
                                         *//*
 
-                                        *//*if(Integer.toString(performanceClass.getId()).equals(b)) {
+         *//*if(Integer.toString(performanceClass.getId()).equals(b)) {
 
 
                                             if (o < f) {
@@ -447,5 +434,4 @@ double attendance =0;
 
 */
     }
-
 }

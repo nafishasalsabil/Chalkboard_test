@@ -393,6 +393,25 @@ public class StudentListHometutor extends AppCompatActivity {
                         perf.put("name", name1);
                         perf.put("count",0);
                         documentReference4.set(perf);
+                        DocumentReference documentReference5 = firestore.collection("users").document(userID)
+                                .collection("Courses").document(clicked_courseTitle)
+                                .collection("Batches").document(clicked_course_section)
+                                .collection("Monthly_Payments").document(Integer.toString(id1));
+                        Map<String, Object> j = new HashMap<>();
+                        j.put("id", id1);
+                        j.put("name", name1);
+                        j.put("payment","unpaid");
+                        documentReference5.set(j);
+                        DocumentReference documentReference = firestore.collection("users").document(userID)
+                                .collection("Courses").document(clicked_courseTitle)
+                                .collection("Batches").document(clicked_course_section)
+                                .collection("Class_Performance")
+                                .document(Integer.toString(id1))
+                                .collection("Marks").document("Coverted_to_100");
+                        Map<String, Object> user1 = new HashMap<>();
+                        user1.put("percentage", 0);
+                        documentReference.set(user1);
+
                         dialog.dismiss();
                     }
                 });
