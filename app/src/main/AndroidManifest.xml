@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MonthlyIncomeHomeTutor"></activity>
+        <activity android:name=".EditNoteHT"></activity>
+        <activity android:name=".MonthlyIncomeHomeTutor" />
         <activity android:name=".ClassPerformanceHT" />
         <activity android:name=".QuizMarksRecordHT" />
         <activity android:name=".QuizHomeTutor" />

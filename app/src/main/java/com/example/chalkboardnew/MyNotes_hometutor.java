@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,7 +47,7 @@ public class MyNotes_hometutor extends AppCompatActivity {
     String title = "";
     String sec = "";
     List<NotesClass> notesClassList = new ArrayList();
-
+Toolbar toolbar1;
     NotesHomeTutorAdapter notesAdapter;
     EditText search_notes;
 
@@ -54,6 +55,7 @@ public class MyNotes_hometutor extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_notes_hometutor);
+
         Intent intent  = getIntent();
         title  =intent.getStringExtra("title");
         sec = intent.getStringExtra("section");

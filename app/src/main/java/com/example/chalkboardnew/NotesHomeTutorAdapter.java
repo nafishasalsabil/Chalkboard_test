@@ -85,11 +85,11 @@ class NotesHomeTutorAdapter extends FirestoreRecyclerAdapter<NotesClass, NotesHo
             my_note = itemView.findViewById(R.id.mynotes_ht);
             url = itemView.findViewById(R.id.url_tv_ht);
             date = itemView.findViewById(R.id.notes_date_ht);
-            itemView.setOnClickListener(new View.OnClickListener() {
+           /* itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    onItemClickListener.onClick(ClassViewHolder.this.getAdapterPosition());
-                    Intent intent = new Intent(v.getContext(),EditNoteActivity.class);
+                    Intent intent = new Intent(v.getContext(),EditNoteHT.class);
                     intent.putExtra("title",title);
                     intent.putExtra("section",section);
                     intent.putExtra("note_name",note_title.getText());
@@ -98,7 +98,7 @@ class NotesHomeTutorAdapter extends FirestoreRecyclerAdapter<NotesClass, NotesHo
                     v.getContext().startActivity(intent);
                 }
             });
-
+*/
         }
     }
 

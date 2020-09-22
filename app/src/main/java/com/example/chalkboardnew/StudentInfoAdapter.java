@@ -158,6 +158,8 @@ class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.student
                         {
                             t3.setText(Double.toString(performanceClass.getCgpa()));
                            t2.setText(performanceClass.getGrade());
+                            System.out.println(quizitems1.get(position).getCgpa());
+                            System.out.println(quizitems1.get(position).getGrade());
 
                         }
 
@@ -175,6 +177,7 @@ class StudentInfoAdapter extends RecyclerView.Adapter<StudentInfoAdapter.student
                         quizitems2.addAll(doc);
                         for(PerformanceClass performanceClass : doc)
                         {
+                            System.out.println(quizitems2.get(position).getCount());
                             t1.setText(Integer.toString(quizitems2.get(position).getCount()));
 
                         }

@@ -30,6 +30,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -115,27 +116,28 @@ public class MarksHomeTutor extends AppCompatActivity {
                 EditText quiz_name =view. findViewById(R.id.quiz_name_edittext_ht);
                 TextView quiz_date = view.findViewById(R.id.quiz_date_textview_ht);
                 EditText total_marks =view. findViewById(R.id.total_marks_ht);
+                final Calendar newCalender = Calendar.getInstance();
 
                 quiz_date.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DatePicker datePicker = new DatePicker(MarksHomeTutor.this);
-                        int day = datePicker.getDayOfMonth();
-                        int month = (datePicker.getMonth()) + 1;
-                        int year = datePicker.getYear();
-
-                        datePickerDialog = new DatePickerDialog(MarksHomeTutor.this, new DatePickerDialog.OnDateSetListener() {
+                        DatePickerDialog dialog = new DatePickerDialog(MarksHomeTutor.this, new DatePickerDialog.OnDateSetListener() {
                             @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            public void onDateSet(DatePicker view, final int year, final int month, final int dayOfMonth) {
+
+                                final Calendar newDate = Calendar.getInstance();
+                                Calendar newTime = Calendar.getInstance();
                                 String date_date = dayOfMonth + "/" + (month + 1) + "/" + year;
                                 quiz_date.setText(date_date);
-                                quizNameClass.setQuiz_date(date_date);
-//                        object.setLecture_date(date_date);
-                                //    studentItems_object.setLecture_date(date_date);
+                                // studentItems_object.setLecture_date(date_date);
+
 
                             }
-                        }, day, month, year);
-                        datePickerDialog.show();
+                        },newCalender.get(Calendar.YEAR),newCalender.get(Calendar.MONTH),newCalender.get(Calendar.DAY_OF_MONTH));
+
+                        dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+                        dialog.show();
+
 
                     }
                 });
